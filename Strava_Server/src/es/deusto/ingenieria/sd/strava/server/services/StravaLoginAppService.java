@@ -1,4 +1,5 @@
 package es.deusto.ingenieria.sd.strava.server.services;
+
 import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
 
 public class StravaLoginAppService {

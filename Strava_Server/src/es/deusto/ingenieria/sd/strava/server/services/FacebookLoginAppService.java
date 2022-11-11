@@ -1,6 +1,7 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
 
@@ -8,8 +9,8 @@ public class FacebookLoginAppService {
 	// Instance for the Singleton Pattern
 	private static FacebookLoginAppService instance;
 
-	// For simulation purposes with "Google Profile Database"
-	public static HashMap<String, Profile> FacebookProfileMap = new HashMap<>();
+	// For simulation purposes with "Facebook Profile Database"
+	public static Map<String, Profile> FacebookProfileMap = new HashMap<>();
 
 	private FacebookLoginAppService() {
 	}

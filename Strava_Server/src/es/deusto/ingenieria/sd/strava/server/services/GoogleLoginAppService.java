@@ -1,6 +1,7 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
 
@@ -9,7 +10,7 @@ public class GoogleLoginAppService {
 	private static GoogleLoginAppService instance;
 
 	// For simulation purposes with "Google Profile Database"
-	public static HashMap<String, Profile> GoogleProfileMap = new HashMap<>();
+	public static Map<String, Profile> GoogleProfileMap = new HashMap<>();
 
 	private GoogleLoginAppService() {
 	}
