@@ -1,2 +1,4 @@
 - Hay que hacer una clase test con la siguiente pinta: (dentro de estos paquetes, para que el fichero ant construya el proyecto) es.deusto.ingenieria.sd.strava.server.test.LocalTest
 - El programa principal del server (run) tiene que tener la siguiente pinta: (dentro de estos paquetes, ...) es.deusto.ingenieria.sd.strava.server.Main
+- En AppService crear un servicio distinto para cada Login y Register (Google, Facebook y Strava)
+- Modificar diagramas para hacer que a través de LoginWindow se acceda al Registro con RegisterDialog
