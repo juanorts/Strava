@@ -1,6 +1,7 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class Profile {
@@ -17,6 +18,7 @@ public class Profile {
 	private List<Challenge> setUpChallenges;
 	private List<Challenge> acceptedChallenges;
 	private List<TrainingSession> createdTrainingSessions;
+	public static HashMap<String, Profile> profilesMap = new HashMap<>();
 	
 	public Profile() {
 		super();
@@ -117,8 +119,7 @@ public class Profile {
 	}
 	
 	public boolean checkPassword(String password) {
-		// TODO
-		return true;
+		return this.password.equals(password);
 	}
 	
 	public List<Challenge> getAcceptedChallenges() {
