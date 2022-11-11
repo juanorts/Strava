@@ -11,7 +11,8 @@ public class FacebookLoginAppService {
 	// For simulation purposes with "Google Profile Database"
 	public static HashMap<String, Profile> FacebookProfileMap = new HashMap<>();
 
-	private FacebookLoginAppService() { }
+	private FacebookLoginAppService() {
+	}
 
 	public static FacebookLoginAppService getInstance() {
 		if (instance == null) {
