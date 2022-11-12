@@ -8,11 +8,11 @@ public class Progress {
 	private int currentTime;
 	private Profile profile;
 	private Challenge challenge;
-	
+
 	public Progress() {
 		super();
 	}
-	
+
 	public Progress(float currentDistance, int currentTime, Profile profile, Challenge challenge, boolean distance) {
 		this.status = calculateStatus(distance);
 		this.setCurrentDistance(currentDistance);
@@ -60,28 +60,28 @@ public class Progress {
 	public void setChallenge(Challenge challenge) {
 		this.challenge = challenge;
 	}
-	
+
 	public float calculateStatus(boolean distance) {
-		
+
 		int currentDistance = 0;
 		int currentTime = 0;
-		
-		for(TrainingSession ts : this.getProfile().getCreatedTrainingSessions()) {
+
+		for (TrainingSession ts : this.getProfile().getCreatedTrainingSessions()) {
 			int result = ts.getStartTime().compareTo(this.getChallenge().getStartDate());
-			if(result >= 0 && distance) {
+			if (result >= 0 && distance) {
 				currentDistance += ts.getDistance();
-				
-			} else if(result >= 0 && !distance) {
+
+			} else if (result >= 0 && !distance) {
 				currentTime += ts.getDuration();
 			}
 		}
-		
-		if(distance) {
+
+		if (distance) {
 			return currentDistance / this.getChallenge().getTargetDistance() * 100;
 		} else {
 			return currentTime / this.getChallenge().getTargetTime() * 100;
 		}
-		
+
 	}
-	
+
 }

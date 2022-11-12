@@ -1,5 +1,6 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class TrainingSession {
@@ -7,14 +8,15 @@ public class TrainingSession {
 	private String title;
 	private Sport sport;
 	private float distance;
-	private Date startTime;
+	private Date startDate;
+	private Time startTime;
 	private int duration;
-	
+
 	public TrainingSession() {
 		super();
 	}
-	
-	public TrainingSession(String title, Sport sport, float distance, Date startDate, int duration, Date startTime) {
+
+	public TrainingSession(String title, Sport sport, float distance, int duration, Date startDate, Time startTime) {
 		this.setTitle(title);
 		this.setSport(sport);
 		this.setDistance(distance);
@@ -46,7 +48,6 @@ public class TrainingSession {
 		this.distance = distance;
 	}
 
-
 	public int getDuration() {
 		return duration;
 	}
@@ -55,18 +56,26 @@ public class TrainingSession {
 		this.duration = duration;
 	}
 
-	public Date getStartTime() {
+	public Time getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Time startTime) {
 		this.startTime = startTime;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
 	@Override
 	public String toString() {
-		return "TrainingSession [title=" + title + ", sport=" + sport + ", distance=" + distance
-				+ ", duration=" + duration + ", startTime=" + startTime + "]";
+		return "TrainingSession [title=" + title + ", sport=" + sport + ", distance=" + distance + ", duration="
+				+ duration + ", startTime=" + startTime + "]";
 	}
-	
+
 }
