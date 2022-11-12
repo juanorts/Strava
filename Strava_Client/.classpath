@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" output="bin" path="src"/>
 	<classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
-	<classpathentry kind="con" path="C:/Users/theal/Documents/GitHub/Strava/Strava_Client/bin"/>
+	<classpathentry kind="con" path="/Users/juan.orts/Documentos/GitHub/Strava/Strava_Client/bin"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

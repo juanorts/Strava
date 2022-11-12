@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Strava_Client</name>
+	<name>4_eAuctions_Client</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -18,12 +18,12 @@
 		<link>
 			<name>bin</name>
 			<type>2</type>
-			<location>/Users/juan.orts/Documentos/GitHub/Strava/Strava_Client/bin</location>
+			<location>/Users/juan.orts/SoftLabs/SD/eAuction-workspace/4_eAuctions_Client/bin</location>
 		</link>
 		<link>
 			<name>src</name>
 			<type>2</type>
-			<location>/Users/juan.orts/Documentos/GitHub/Strava/Strava_Client/src</location>
+			<location>/Users/juan.orts/SoftLabs/SD/eAuction-workspace/4_eAuctions_Client/src</location>
 		</link>
 	</linkedResources>
 </projectDescription>

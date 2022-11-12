@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="bin" path="src"/>
+	<classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
+	<classpathentry kind="lib" path="/Users/juan.orts/SoftLabs/SD/eAuction-workspace/4_eAuctions_Client/lib/commons-codec-1.15.jar"/>
+	<classpathentry kind="lib" path="/Users/juan.orts/SoftLabs/SD/eAuction-workspace/4_eAuctions_Client/lib/eAuctions.jar"/>
+	<classpathentry kind="con" path="/Users/juan.orts/SoftLabs/SD/eAuction-workspace/4_eAuctions_Client/bin"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
