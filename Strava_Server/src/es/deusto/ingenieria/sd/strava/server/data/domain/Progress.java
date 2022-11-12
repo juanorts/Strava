@@ -67,7 +67,7 @@ public class Progress {
 		int currentTime = 0;
 		
 		for(TrainingSession ts : this.getProfile().getCreatedTrainingSessions()) {
-			int result = ts.getStartDate().compareTo(this.getChallenge().getStartDate());
+			int result = ts.getStartTime().compareTo(this.getChallenge().getStartDate());
 			if(result >= 0 && distance) {
 				currentDistance += ts.getDistance();
 				
