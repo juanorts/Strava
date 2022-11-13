@@ -1,27 +1,16 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
-import java.rmi.RemoteException;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
 import es.deusto.ingenieria.sd.strava.server.data.domain.ProfileType;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 import es.deusto.ingenieria.sd.strava.server.data.domain.TrainingSession;
-import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
-import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionAssembler;
-import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionDTO;
-import es.deusto.ingenieria.sd.strava.server.services.FacebookLoginAppService;
-import es.deusto.ingenieria.sd.strava.server.services.GoogleLoginAppService;
-import es.deusto.ingenieria.sd.strava.server.services.StravaLoginAppService;
 
 public class StravaAppService {
 	private static StravaAppService instance;
@@ -83,9 +72,9 @@ public class StravaAppService {
 			Challenge c8 = new Challenge("Running and Cycling 150",cc8,cc9,150,400,Sport.BOTH);
 			Challenge c9 = new Challenge("Running and Cycling 350",cc7,cc9,350,800,Sport.BOTH);
 			
-			Time tt1 = new Time(12,30,0);
-			Time tt2 = new Time(18,15,0);
-			Time tt3 = new Time(10,0,0);
+			LocalTime tt1 = LocalTime.NOON;
+			LocalTime tt2 = LocalTime.now();
+			LocalTime tt3 = LocalTime.of(10, 40);
 			
 			TrainingSession t1 = new TrainingSession("Day1",Sport.BOTH,20.0f,60,cc1,tt1);
 			TrainingSession t2 = new TrainingSession("Day1",Sport.BOTH,30.0f,90,cc2,tt2);
@@ -144,7 +133,7 @@ public class StravaAppService {
 	}
 
 	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime,
-			Sport sport, Timestamp token, Profile profile) {
+			Sport sport, Profile profile) {
 
 		Challenge challenge = new Challenge(name, startDate, endDate, targetDistance, targetTime, sport);
 		profile.addChallenge(challenge);
@@ -152,7 +141,7 @@ public class StravaAppService {
 	}
 
 	public boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration,
-			Time startTime, Profile profile) {
+			LocalTime startTime, Profile profile) {
 
 		TrainingSession trainingSession = new TrainingSession(title, sport, distance, duration, startDate, startTime);
 		profile.addTrainingSession(trainingSession);
