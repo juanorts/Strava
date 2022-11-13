@@ -36,11 +36,10 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	@Override
 	public boolean register(String email, String password, String name, Date birthDate, float weight, int height,
-			int maxBpm, int restBpm, ProfileType profileType) throws RemoteException {
+			int maxBpm, int restBpm, String profileType) throws RemoteException {
 		System.out.println(" * RemoteFacade register(): " + email);
 
-		if (RegisterAppService.getInstance().register(email, password, name, birthDate, weight, height, maxBpm, restBpm,
-				profileType)) {
+		if (RegisterAppService.getInstance().register(email, password, name, birthDate, weight, height, maxBpm, restBpm, profileType)) {
 			return true;
 		} else {
 			throw new RemoteException("Register fails, user is already registered!");
@@ -48,14 +47,14 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public long login(String email, String password, ProfileType profileType) throws RemoteException {
+	public long login(String email, String password, String profileType) throws RemoteException {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 		Profile profile = new Profile();
-		if (profileType.equals(ProfileType.STRAVA)) {
+		if (profileType.equals("STRAVA")) {
 			profile = StravaLoginAppService.getInstance().login(email, password);
-		} else if (profileType.equals(ProfileType.FACEBOOK)) {
+		} else if (profileType.equals("FACEBOOK")) {
 			profile = FacebookLoginAppService.getInstance().login(email, password);
-		} else if (profileType.equals(ProfileType.GOOGLE)) {
+		} else if (profileType.equals("GOOGLE")) {
 			profile = GoogleLoginAppService.getInstance().login(email, password);
 		}
 		if (profile != null) {
@@ -87,7 +86,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	@Override
 	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime,
-			Sport sport, long token) throws RemoteException {
+			String sport, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade createChallenge(): " + token);
 		if (this.serverState.containsKey(token)) {
 			return StravaAppService.getInstance().createChallenge(name, startDate, endDate, targetDistance, targetTime,
@@ -98,7 +97,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration,
+	public boolean createTrainingSession(String title, String sport, float distance, Date startDate, int duration,
 			LocalTime startTime, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade createTrainingSession(): " + token);
 		if (this.serverState.containsKey(token)) {
@@ -110,7 +109,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public List<TrainingSessionDTO> getSportTrainingSessions(Sport sport, long token) throws RemoteException {
+	public List<TrainingSessionDTO> getSportTrainingSessions(String sport, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade getSportTrainingSessions(): " + token);
 		if (this.serverState.containsKey(token)) {
 			List<TrainingSession> trainingSessions = StravaAppService.getInstance().getSportTrainingSessions(sport);

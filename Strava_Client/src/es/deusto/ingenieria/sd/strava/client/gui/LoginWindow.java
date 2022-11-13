@@ -1,18 +1,27 @@
 package es.deusto.ingenieria.sd.strava.client.gui;
 
 import javax.swing.*;
+
+import es.deusto.ingenieria.sd.strava.client.controller.LoginController;
+import es.deusto.ingenieria.sd.strava.client.controller.RegisterController;
+import es.deusto.ingenieria.sd.strava.client.controller.StravaController;
+
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginWindow extends JFrame{
 	private JTextField tEmail;
 	private JTextField tPass;
-	public LoginWindow() {
+	
+	public LoginWindow(LoginController lController, RegisterController rController, StravaController sController) {
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setResizable(false);
 		setTitle("Strava - Login");
+		setSize(450, 310);
 		
 		JPanel pPrin = new JPanel();
 		pPrin.setBackground(SystemColor.window);
@@ -64,6 +73,62 @@ public class LoginWindow extends JFrame{
 		bRegister.setForeground(new Color(41, 118, 239));
 		bRegister.setBounds(210, 237, 117, 29);
 		pPrin.add(bRegister);
+		
+		//	Actions
+		
+		bStrava.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				boolean login = lController.login(tEmail.getText(), tPass.getText(), "STRAVA");
+				if(login) {
+					ChallengesWindow cw = new ChallengesWindow();
+					cw.setVisible(true);
+					dispose();
+				}
+			}
+			
+		});
+		
+		bGoogle.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				boolean login = lController.login(tEmail.getText(), tPass.getText(), "GOOGLE");
+				if(login) {
+					ChallengesWindow cw = new ChallengesWindow();
+					cw.setVisible(true);
+					dispose();
+				}
+			}
+			
+		});
+		
+		bFB.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				boolean login = lController.login(tEmail.getText(), tPass.getText(), "FACEBOOK");
+				if(login) {
+					ChallengesWindow cw = new ChallengesWindow();
+					cw.setVisible(true);
+					dispose();
+				}
+			}
+			
+		});
+		
+		bRegister.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				RegisterWindow rw = new RegisterWindow(rController);
+				rw.setVisible(true);
+				setVisible(false);
+			}
+			
+		});
+		
 	}
 
 }

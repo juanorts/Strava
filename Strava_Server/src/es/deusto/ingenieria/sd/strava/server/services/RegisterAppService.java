@@ -20,10 +20,10 @@ public class RegisterAppService {
 	}
 	
 	public boolean register(String email, String password, String name, Date birthDate, float weight, int height,
-			int maxBpm, int restBpm, ProfileType profileType) {
-		Profile profile = new Profile(email, password, name, birthDate, weight, height, maxBpm, restBpm, profileType);
+			int maxBpm, int restBpm, String profileType) {
 		switch (profileType) {
-		case STRAVA:
+		case "STRAVA":
+			Profile profile = new Profile(email, password, name, birthDate, weight, height, maxBpm, restBpm, ProfileType.STRAVA);
 			if (!StravaLoginAppService.getInstance().getStravaProfileMap().containsKey(email)) {
 				StravaLoginAppService.getInstance().addProfile(email, profile);
 				return true;
@@ -31,18 +31,20 @@ public class RegisterAppService {
 				return false;
 			}
 
-		case FACEBOOK:
-			profile.setPassword(null);
+		case "FACEBOOK":
+			Profile profile1 = new Profile(email, password, name, birthDate, weight, height, maxBpm, restBpm, ProfileType.FACEBOOK);
+			profile1.setPassword(null);
 			if (!FacebookLoginAppService.getInstance().getFacebookProfileMap().containsKey(email)) {
-				FacebookLoginAppService.getInstance().addProfile(email, profile);
+				FacebookLoginAppService.getInstance().addProfile(email, profile1);
 				return true;
 			} else {
 				return false;
 			}
-		case GOOGLE:
-			profile.setPassword(null);
+		case "GOOGLE":
+			Profile profile11 = new Profile(email, password, name, birthDate, weight, height, maxBpm, restBpm, ProfileType.GOOGLE);
+			profile11.setPassword(null);
 			if (!GoogleLoginAppService.getInstance().getGoogleProfileMap().containsKey(email)) {
-				GoogleLoginAppService.getInstance().addProfile(email, profile); 
+				GoogleLoginAppService.getInstance().addProfile(email, profile11); 
 				return true;
 			} else {
 				return false;

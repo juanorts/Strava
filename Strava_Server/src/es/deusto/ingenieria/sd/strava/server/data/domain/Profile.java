@@ -33,9 +33,9 @@ public class Profile {
 		this.setMaxBPM(maxBPM);
 		this.setRestBPM(restBPM);
 		this.setProfileType(profileType);
-		this.setUpChallenges = new ArrayList<>();
-		this.acceptedChallenges = new ArrayList<>();
-		this.createdTrainingSessions = new ArrayList<>();
+		this.setUpChallenges = new ArrayList<Challenge>();
+		this.acceptedChallenges = new ArrayList<Challenge>();
+		this.createdTrainingSessions = new ArrayList<TrainingSession>();
 	}
 	
 	public String getEmail() {

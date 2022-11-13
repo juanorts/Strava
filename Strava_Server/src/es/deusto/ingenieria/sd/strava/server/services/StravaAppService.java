@@ -27,27 +27,54 @@ public class StravaAppService {
 	}
 
 	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime,
-			Sport sport, Profile profile) {
-
-		Challenge challenge = new Challenge(name, startDate, endDate, targetDistance, targetTime, sport);
-		profile.addChallenge(challenge);
-		return true;
+			String sport, Profile profile) {
+		switch(sport) {
+		case "RUNNING":
+			Challenge challenge = new Challenge(name, startDate, endDate, targetDistance, targetTime, Sport.RUNNING);
+			profile.addChallenge(challenge);
+			return true;
+		case "CYCLING":
+			Challenge challenge1 = new Challenge(name, startDate, endDate, targetDistance, targetTime, Sport.RUNNING);
+			profile.addChallenge(challenge1);
+			return true;
+		case "BOTH":
+			Challenge challenge2 = new Challenge(name, startDate, endDate, targetDistance, targetTime, Sport.RUNNING);
+			profile.addChallenge(challenge2);
+			return true;
+		default:
+			break;
+		}
+		return false;
 	}
 
-	public boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration,
+	public boolean createTrainingSession(String title, String sport, float distance, Date startDate, int duration,
 			LocalTime startTime, Profile profile) {
 
-		TrainingSession trainingSession = new TrainingSession(title, sport, distance, duration, startDate, startTime);
-		profile.addTrainingSession(trainingSession);
-		return true;
+		switch(sport) {
+		case "RUNNING":
+			TrainingSession trainingSession = new TrainingSession(title, Sport.RUNNING, distance, duration, startDate, startTime);
+			profile.addTrainingSession(trainingSession);
+			return true;
+		case "CYCLING":
+			TrainingSession trainingSession1 = new TrainingSession(title, Sport.CYCLING, distance, duration, startDate, startTime);
+			profile.addTrainingSession(trainingSession1);
+			return true;
+		case "BOTH":
+			TrainingSession trainingSession2 = new TrainingSession(title, Sport.BOTH, distance, duration, startDate, startTime);
+			profile.addTrainingSession(trainingSession2);
+			return true;
+		default:
+			break;
+		}
+		return false;
 	}
 
-	public List<TrainingSession> getSportTrainingSessions(Sport sport) {
+	public List<TrainingSession> getSportTrainingSessions(String sport) {
 		List<TrainingSession> trainingSessions = new ArrayList<>();
 		for (Profile profile : StravaAppService.getInstance().retrieveProfiles()) {
 			if (!profile.getCreatedTrainingSessions().isEmpty()) {
 				for (TrainingSession trainingSession : profile.getCreatedTrainingSessions()) {
-					if (trainingSession.getSport().equals(sport)) {
+					if (trainingSession.getSport().name().equals(sport)) {
 						trainingSessions.add(trainingSession);
 					}
 				}

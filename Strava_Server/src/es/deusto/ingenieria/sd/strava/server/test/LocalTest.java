@@ -22,22 +22,22 @@ public class LocalTest {
 			facade = new RemoteFacade();
 			System.out.println((StravaLoginAppService.getInstance() == null));
 			// Test Register
-			System.out.println("User was registered in test succesfully: " + facade.register("ruben@hotmail.es", "ruta76", "Ruben", new Date(2000, 8, 2), 80, 185, 200, 50, ProfileType.STRAVA));
+			System.out.println("User was registered in test succesfully: " + facade.register("ruben@hotmail.es", "ruta76", "Ruben", new Date(2000, 8, 2), 80, 185, 200, 50, "STRAVA"));
 			// Test Login
-			long token = facade.login("ruben@hotmail.es", "ruta76", ProfileType.STRAVA);
+			long token = facade.login("ruben@hotmail.es", "ruta76", "STRAVA");
 			System.out.println("Test user with mail ruben@hotmail.es login with token : " + token);
 			// Test Logout
 			facade.logout(token);
 			System.out.println("Test user with mail ruben@hotmail.es logout");
 			// Test Login Facebook/Google
-			token = facade.login("alvaro@mail.es", null, ProfileType.GOOGLE);
+			token = facade.login("alvaro@mail.es", null, "GOOGLE");
 			System.out.println("Test user with mail alvaro@mail.es login with token : " + token);
 			// Test Create Challenge
-			System.out.println("Test user with mail alvaro@mail.es created a challenge succesfully : " + facade.createChallenge("Run4Ever", new Date(2000, 8, 2), new Date(2000, 9, 2), 0, 60, Sport.BOTH, token));
+			System.out.println("Test user with mail alvaro@mail.es created a challenge succesfully : " + facade.createChallenge("Run4Ever", new Date(2000, 8, 2), new Date(2000, 9, 2), 0, 60, "BOTH", token));
 			// Test Create TSession
-			System.out.println("Test user with mail alvaro@mail.es created a Training Session succesfully : " + facade.createTrainingSession("FirstSession", Sport.RUNNING, 0, new Date(2000, 8, 2), 60, LocalTime.now(), token));
+			System.out.println("Test user with mail alvaro@mail.es created a Training Session succesfully : " + facade.createTrainingSession("FirstSession", "RUNNING", 0, new Date(2000, 8, 2), 60, LocalTime.now(), token));
 			// Test getSportTrainingSessions
-			sportTrainingSessions = facade.getSportTrainingSessions(Sport.RUNNING, token);
+			sportTrainingSessions = facade.getSportTrainingSessions("RUNNING", token);
 			System.out.println("Test user with mail alvaro@mail.es received the training sessions of the specified sport : ");
 			for (TrainingSessionDTO session : sportTrainingSessions) {
 				System.out.println("----------------------------");

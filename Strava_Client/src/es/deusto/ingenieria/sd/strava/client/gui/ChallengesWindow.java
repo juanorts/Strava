@@ -8,8 +8,8 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 
-public class ChallengeWindows extends JFrame {
-	public ChallengeWindows() {
+public class ChallengesWindow extends JFrame {
+	public ChallengesWindow() {
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);

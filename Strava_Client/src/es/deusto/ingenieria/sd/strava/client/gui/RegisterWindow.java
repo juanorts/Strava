@@ -1,10 +1,15 @@
 package es.deusto.ingenieria.sd.strava.client.gui;
 
 import javax.swing.*;
+
+import es.deusto.ingenieria.sd.strava.client.controller.RegisterController;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RegisterWindow extends JFrame {
 	private JTextField tEmail;
@@ -12,15 +17,17 @@ public class RegisterWindow extends JFrame {
 	private JTextField tName;
 	private JTextField tBirthDate;
 	private JTextField tWeight;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	public RegisterWindow() {
+	private JTextField tHeight;
+	private JTextField tMaxBPM;
+	private JTextField tRestBPM;
+	
+	public RegisterWindow(RegisterController controller) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Strava - Register");
 		getContentPane().setForeground(Color.WHITE);
 		setBackground(Color.WHITE);
 		setResizable(false);
+		setSize(490, 690);
 		
 		JPanel pMain = new JPanel();
 		pMain.setBackground(SystemColor.window);
@@ -43,18 +50,18 @@ public class RegisterWindow extends JFrame {
 		tName.setBounds(146, 82, 202, 26);
 		pMain.add(tName);
 		
-		JLabel lblEmail = new JLabel("Email *");
-		lblEmail.setBounds(146, 120, 61, 16);
-		pMain.add(lblEmail);
+		JLabel lEmail = new JLabel("Email *");
+		lEmail.setBounds(146, 120, 61, 16);
+		pMain.add(lEmail);
 		
 		tEmail = new JTextField();
 		tEmail.setColumns(10);
 		tEmail.setBounds(146, 139, 202, 26);
 		pMain.add(tEmail);
 		
-		JLabel lblPassword = new JLabel("Password **");
-		lblPassword.setBounds(146, 177, 84, 16);
-		pMain.add(lblPassword);
+		JLabel lPass = new JLabel("Password **");
+		lPass.setBounds(146, 177, 84, 16);
+		pMain.add(lPass);
 		
 		tPassword = new JTextField();
 		tPassword.setColumns(10);
@@ -79,55 +86,85 @@ public class RegisterWindow extends JFrame {
 		pMain.add(tWeight);
 		tWeight.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Height");
-		lblNewLabel.setBounds(146, 374, 61, 16);
-		pMain.add(lblNewLabel);
+		JLabel lHeight = new JLabel("Height");
+		lHeight.setBounds(146, 374, 61, 16);
+		pMain.add(lHeight);
 		
-		textField = new JTextField();
-		textField.setBounds(146, 402, 202, 26);
-		pMain.add(textField);
-		textField.setColumns(10);
+		tHeight = new JTextField();
+		tHeight.setBounds(146, 402, 202, 26);
+		pMain.add(tHeight);
+		tHeight.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Maximum BPM");
-		lblNewLabel_1.setBounds(146, 440, 104, 16);
-		pMain.add(lblNewLabel_1);
+		JLabel lMaxBPM = new JLabel("Maximum BPM");
+		lMaxBPM.setBounds(146, 440, 104, 16);
+		pMain.add(lMaxBPM);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(146, 466, 202, 26);
-		pMain.add(textField_1);
-		textField_1.setColumns(10);
+		tMaxBPM = new JTextField();
+		tMaxBPM.setBounds(146, 466, 202, 26);
+		pMain.add(tMaxBPM);
+		tMaxBPM.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Rest BPM");
-		lblNewLabel_2.setBounds(146, 504, 61, 16);
-		pMain.add(lblNewLabel_2);
+		JLabel lRestBPM = new JLabel("Rest BPM");
+		lRestBPM.setBounds(146, 504, 61, 16);
+		pMain.add(lRestBPM);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(146, 532, 202, 26);
-		pMain.add(textField_2);
-		textField_2.setColumns(10);
+		tRestBPM = new JTextField();
+		tRestBPM.setBounds(146, 532, 202, 26);
+		pMain.add(tRestBPM);
+		tRestBPM.setColumns(10);
 		
-		JButton btnRegisterWithStrava = new JButton("Register with Strava");
-		btnRegisterWithStrava.setBounds(6, 621, 154, 26);
-		pMain.add(btnRegisterWithStrava);
+		JButton bStrava = new JButton("Register with Strava");
+		bStrava.setBounds(6, 621, 154, 26);
+		pMain.add(bStrava);
 		
-		JButton btnRegisterWithGoogle = new JButton("Register with Google");
-		btnRegisterWithGoogle.setBounds(153, 621, 161, 26);
-		pMain.add(btnRegisterWithGoogle);
+		JButton bGoogle = new JButton("Register with Google");
+		bGoogle.setBounds(153, 621, 161, 26);
+		pMain.add(bGoogle);
 		
-		JButton btnRegisterWithFacebook = new JButton("Register with Facebook");
-		btnRegisterWithFacebook.setBounds(305, 621, 182, 26);
-		pMain.add(btnRegisterWithFacebook);
+		JButton bFB = new JButton("Register with Facebook");
+		bFB.setBounds(305, 621, 182, 26);
+		pMain.add(bFB);
 		
-		JLabel lblNewLabel_3 = new JLabel("* Field must be filled");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
-		lblNewLabel_3.setBounds(146, 570, 202, 16);
-		pMain.add(lblNewLabel_3);
+		JLabel lMessage1 = new JLabel("* Field must be filled");
+		lMessage1.setHorizontalAlignment(SwingConstants.CENTER);
+		lMessage1.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
+		lMessage1.setBounds(146, 570, 202, 16);
+		pMain.add(lMessage1);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("** Password is only necessary for Strava");
-		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3_1.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
-		lblNewLabel_3_1.setBounds(109, 593, 283, 16);
-		pMain.add(lblNewLabel_3_1);
+		JLabel lMessage2 = new JLabel("** Password is only necessary for Strava");
+		lMessage2.setHorizontalAlignment(SwingConstants.CENTER);
+		lMessage2.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
+		lMessage2.setBounds(109, 593, 283, 16);
+		pMain.add(lMessage2);
+		
+		//	Actions
+		
+		bStrava.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+			
+		});
+		
+		bGoogle.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+			
+		});
+		
+		bFB.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+			
+		});
+		
 	}
 }

@@ -1,5 +1,9 @@
 package es.deusto.ingenieria.sd.strava.client.remote;
 
+import java.rmi.Naming;
+
+import es.deusto.ingenieria.sd.strava.server.remote.IRemoteFacade;
+
 public class ServiceLocator {
 	//Remote Facade reference
 		private IRemoteFacade service;

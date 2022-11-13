@@ -1,9 +1,12 @@
 package es.deusto.ingenieria.sd.strava.client.controller;
+import java.rmi.RemoteException;
 import java.sql.Date;
 import java.time.LocalTime;
+import java.util.List;
 
 import es.deusto.ingenieria.sd.strava.client.remote.ServiceLocator;
-import es.deusto.ingenieria.sd.strava.server.data.*;
+import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
+import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionDTO;
 
 public class StravaController {
 	private ServiceLocator serviceLocator;
@@ -11,20 +14,20 @@ public class StravaController {
 	public StravaController(ServiceLocator serviceLocator) {
 		this.serviceLocator = serviceLocator; 
 	}
-	private boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime, Sport sport){
-		return this.serviceLocator.getService().createChallenge(name, startDate, endDate, targetDistance, targetTime, sport);
+	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime, String sport) throws RemoteException{
+		return this.serviceLocator.getService().createChallenge(name, startDate, endDate, targetDistance, targetTime, sport, LoginController.token);
 	}
-	private boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration, LocalTime startTime) {
-		return this.serviceLocator.getService().createTrainingSession(title, sport, distance, startDate, duration, startTime);
+	public boolean createTrainingSession(String title, String sport, float distance, Date startDate, int duration, LocalTime startTime) throws RemoteException {
+		return this.serviceLocator.getService().createTrainingSession(title, sport, distance, startDate, duration, startTime, LoginController.token);
 	}
-	private List<TrainingSessionDTO> getSportTrainingSessions(String sport){
-		return this.serviceLocator.getService().getSportTrainingSessions(sport);
+	public List<TrainingSessionDTO> getSportTrainingSessions(String sport) throws RemoteException{
+		return this.serviceLocator.getService().getSportTrainingSessions(sport, LoginController.token);
 	}
-	private List<ChallengeDTO> getActiveChallenges(){
-		return this.serviceLocator.getService().getActiveChallenges();
+	public List<ChallengeDTO> getActiveChallenges() throws RemoteException{
+		return this.serviceLocator.getService().getActiveChallenges(LoginController.token);
 	}
-	private boolean acceptChallenge(String name) {
-		return this.serviceLocator.getService().acceptChallenge(name);
+	public boolean acceptChallenge(String name) throws RemoteException {
+		return this.serviceLocator.getService().acceptChallenge(name, LoginController.token);
 	}
 	
 	

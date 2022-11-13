@@ -13,7 +13,7 @@
         <fileset dir="${lib.dir}">
             <include name="**/*.jar"/>
         </fileset>
-        <pathelement location="${build.dir}"/>    	
+        <pathelement location="${build.dir}"/>
     </path>
 	
 	<target name="1.build" description="Builds the project">
