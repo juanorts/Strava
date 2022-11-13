@@ -7,6 +7,7 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
 import es.deusto.ingenieria.sd.strava.server.data.domain.ProfileType;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
@@ -31,4 +32,5 @@ public interface IRemoteFacade extends Remote{
 	public List<ChallengeDTO> getActiveChallenges(Timestamp token) throws RemoteException;
 
 	public boolean acceptChallenge(String name, Timestamp token) throws RemoteException;
+	
 }

@@ -18,7 +18,6 @@ public class Profile {
 	private List<Challenge> setUpChallenges;
 	private List<Challenge> acceptedChallenges;
 	private List<TrainingSession> createdTrainingSessions;
-	public static HashMap<String, Profile> profilesMap = new HashMap<>();
 	
 	public Profile() {
 		super();
