@@ -1,5 +1,6 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,9 @@ public class Profile {
 		this.setMaxBPM(maxBPM);
 		this.setRestBPM(restBPM);
 		this.setProfileType(profileType);
+		this.setUpChallenges = new ArrayList<>();
+		this.acceptedChallenges = new ArrayList<>();
+		this.createdTrainingSessions = new ArrayList<>();
 	}
 	
 	public String getEmail() {

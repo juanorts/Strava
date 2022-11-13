@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" output="bin" path="src"/>
 	<classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
-	<classpathentry kind="lib" path="C:/Users/andon/Documents/GitHub/Strava/Strava_Client/lib/Strava.jar"/>
-	<classpathentry kind="lib" path="C:/Users/andon/Documents/GitHub/Strava/Strava_Client/lib/commons-codec-1.15.jar"/>
-	<classpathentry kind="con" path="C:/Users/andon/Documents/GitHub/Strava/Strava_Client/bin"/>
+	<classpathentry kind="lib" path="lib/Strava.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.15.jar"/>
+	<classpathentry kind="con" path="bin"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

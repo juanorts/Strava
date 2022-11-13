@@ -17,6 +17,7 @@ public class LocalTest {
 		List<ChallengeDTO> activeChallenges = null;
 		
 		try {
+			facade = new RemoteFacade();
 			// Test Register
 			System.out.println("User was registered in test succesfully: " + facade.register("ruben@hotmail.es", "ruta76", "Ruben", new Date(2000, 8, 2), 80, 185, 200, 50, ProfileType.STRAVA));
 			// Test Login
