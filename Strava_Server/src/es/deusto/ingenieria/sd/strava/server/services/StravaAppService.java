@@ -1,25 +1,14 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
-import java.rmi.RemoteException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
-import es.deusto.ingenieria.sd.strava.server.data.domain.ProfileType;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 import es.deusto.ingenieria.sd.strava.server.data.domain.TrainingSession;
-import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
-import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionAssembler;
-import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionDTO;
-import es.deusto.ingenieria.sd.strava.server.services.FacebookLoginAppService;
-import es.deusto.ingenieria.sd.strava.server.services.GoogleLoginAppService;
-import es.deusto.ingenieria.sd.strava.server.services.StravaLoginAppService;
 
 public class StravaAppService {
 	private static StravaAppService instance;
@@ -79,7 +68,7 @@ public class StravaAppService {
 	}
 
 	public void acceptChallenge(Profile p, Challenge c) {
-		p.addChallenge(c);
+		p.acceptChallenge(c);
 	}
 
 	// Auxiliary method to gather all the profiles in the AppServices, due to no DAO

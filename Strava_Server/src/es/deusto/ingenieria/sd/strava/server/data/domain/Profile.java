@@ -1,7 +1,6 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class Profile {

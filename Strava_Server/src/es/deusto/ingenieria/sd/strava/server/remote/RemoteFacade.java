@@ -3,7 +3,6 @@ package es.deusto.ingenieria.sd.strava.server.remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.sql.Time;

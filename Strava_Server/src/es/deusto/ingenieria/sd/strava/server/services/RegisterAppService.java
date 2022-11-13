@@ -1,6 +1,5 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
-import java.rmi.RemoteException;
 import java.util.Date;
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
