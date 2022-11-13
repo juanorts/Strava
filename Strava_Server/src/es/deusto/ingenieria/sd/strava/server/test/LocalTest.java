@@ -9,8 +9,10 @@ import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionDTO;
 import es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade;
+import es.deusto.ingenieria.sd.strava.server.services.StravaLoginAppService;
 
 public class LocalTest {
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		RemoteFacade facade = null;
 		List<TrainingSessionDTO> sportTrainingSessions = null;
@@ -18,6 +20,7 @@ public class LocalTest {
 		
 		try {
 			facade = new RemoteFacade();
+			System.out.println((StravaLoginAppService.getInstance() == null));
 			// Test Register
 			System.out.println("User was registered in test succesfully: " + facade.register("ruben@hotmail.es", "ruta76", "Ruben", new Date(2000, 8, 2), 80, 185, 200, 50, ProfileType.STRAVA));
 			// Test Login
@@ -38,7 +41,7 @@ public class LocalTest {
 			System.out.println("Test user with mail alvaro@mail.es received the training sessions of the specified sport : ");
 			for (TrainingSessionDTO session : sportTrainingSessions) {
 				System.out.println("----------------------------");
-				System.out.println(session.toString());
+				System.out.println(session.getTitle());
 				System.out.println("----------------------------");
 			}
 			// Test getActiveChallenges

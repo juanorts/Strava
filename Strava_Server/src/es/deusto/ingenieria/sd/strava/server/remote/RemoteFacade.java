@@ -51,18 +51,12 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public long login(String email, String password, ProfileType profileType) throws RemoteException {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 		Profile profile = new Profile();
-		switch (profileType) {
-		case STRAVA:
+		if (profileType.equals(ProfileType.STRAVA)) {
 			profile = StravaLoginAppService.getInstance().login(email, password);
-
-		case FACEBOOK:
+		} else if (profileType.equals(ProfileType.FACEBOOK)) {
 			profile = FacebookLoginAppService.getInstance().login(email, password);
-
-		case GOOGLE:
+		} else if (profileType.equals(ProfileType.GOOGLE)) {
 			profile = GoogleLoginAppService.getInstance().login(email, password);
-
-		default:
-			break;
 		}
 		if (profile != null) {
 			// If user is not logged in
@@ -96,7 +90,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			Sport sport, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade createChallenge(): " + token);
 		if (this.serverState.containsKey(token)) {
-			return StravaAppService.getInstance().createChallenge(name, startDate, endDate, targetDistance, targetTime, sport, this.serverState.get(token));
+			return StravaAppService.getInstance().createChallenge(name, startDate, endDate, targetDistance, targetTime,
+					sport, this.serverState.get(token));
 		} else {
 			throw new RemoteException("User is not not logged in!");
 		}
@@ -107,7 +102,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			LocalTime startTime, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade createTrainingSession(): " + token);
 		if (this.serverState.containsKey(token)) {
-			return StravaAppService.getInstance().createTrainingSession(title, sport, distance, startDate, duration, startTime, this.serverState.get(token));
+			return StravaAppService.getInstance().createTrainingSession(title, sport, distance, startDate, duration,
+					startTime, this.serverState.get(token));
 		} else {
 			throw new RemoteException("User is not not logged in!");
 		}
@@ -117,7 +113,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public List<TrainingSessionDTO> getSportTrainingSessions(Sport sport, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade getSportTrainingSessions(): " + token);
 		if (this.serverState.containsKey(token)) {
-			List<TrainingSession> trainingSessions = StravaAppService.getInstance().getSportTrainingSessions(sport);			
+			List<TrainingSession> trainingSessions = StravaAppService.getInstance().getSportTrainingSessions(sport);
 			if (trainingSessions.isEmpty()) {
 				throw new RemoteException("There are no sessions of the specified sport!");
 			} else {

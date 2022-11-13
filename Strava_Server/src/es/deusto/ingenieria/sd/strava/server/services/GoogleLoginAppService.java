@@ -23,8 +23,9 @@ public class GoogleLoginAppService {
 		this.initializeData();
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void initializeData() {
-		SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+
 		Date d4 = new Date(1999, 9, 8);
 		Date d5 = new Date(1987, 3, 7);
 		Date d6 = new Date(1965, 6, 6);
@@ -59,9 +60,9 @@ public class GoogleLoginAppService {
 		p5.addTrainingSession(t5);
 		p6.addTrainingSession(t6);
 		
-		GoogleLoginAppService.getInstance().addProfile(p4.getEmail(), p4);
-		GoogleLoginAppService.getInstance().addProfile(p5.getEmail(), p5);
-		GoogleLoginAppService.getInstance().addProfile(p6.getEmail(), p6);
+		this.addProfile(p4.getEmail(), p4);
+		this.addProfile(p5.getEmail(), p5);
+		this.addProfile(p6.getEmail(), p6);
 		
 	}
 

@@ -1,6 +1,5 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
@@ -24,8 +23,8 @@ public class FacebookLoginAppService {
 		this.initializeData();
 
 	}
+	@SuppressWarnings("deprecation")
 	private void initializeData(){
-		SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
 		
 		Date d1 = new Date(2002, 11, 11);
 		Date d2 = new Date(2008, 10, 10);
@@ -59,9 +58,9 @@ public class FacebookLoginAppService {
 		p2.addTrainingSession(t2);
 		p3.addTrainingSession(t3);
 		
-		FacebookLoginAppService.getInstance().addProfile(p1.getEmail(), p1);
-		FacebookLoginAppService.getInstance().addProfile(p2.getEmail(), p2);
-		FacebookLoginAppService.getInstance().addProfile(p3.getEmail(), p3);
+		this.addProfile(p1.getEmail(), p1);
+		this.addProfile(p2.getEmail(), p2);
+		this.addProfile(p3.getEmail(), p3);
 	}
 
 	public static FacebookLoginAppService getInstance(){

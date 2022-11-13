@@ -20,8 +20,8 @@ public class StravaLoginAppService {
 		this.initializeData();
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void initializeData() {
-		SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
 		
 		Date d7 = new Date(1999, 5, 12);
 		Date d8 = new Date(2007, 7, 4);
@@ -60,9 +60,9 @@ public class StravaLoginAppService {
 		p8.addTrainingSession(t8);
 		p9.addTrainingSession(t9);
 		
-		StravaLoginAppService.getInstance().addProfile(p7.getEmail(), p7);
-		StravaLoginAppService.getInstance().addProfile(p8.getEmail(), p8);
-		StravaLoginAppService.getInstance().addProfile(p9.getEmail(), p9);
+		this.addProfile(p7.getEmail(), p7);
+		this.addProfile(p8.getEmail(), p8);
+		this.addProfile(p9.getEmail(), p9);
 		
 		
 	}

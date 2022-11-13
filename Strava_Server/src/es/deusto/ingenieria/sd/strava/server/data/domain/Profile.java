@@ -121,7 +121,12 @@ public class Profile {
 	}
 	
 	public boolean checkPassword(String password) {
-		return this.password.equals(password);
+		if (password != null) {
+			return this.password.equals(password);
+		} else {
+			return true;
+		}
+		
 	}
 	
 	public List<Challenge> getAcceptedChallenges() {
