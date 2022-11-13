@@ -34,16 +34,16 @@ public class RegisterAppService {
 
 		case FACEBOOK:
 			profile.setPassword(null);
-			if (!FacebookLoginAppService.FacebookProfileMap.containsKey(email)) {
-				FacebookLoginAppService.FacebookProfileMap.put(email, profile);
+			if (!FacebookLoginAppService.getInstance().getFacebookProfileMap().containsKey(email)) {
+				FacebookLoginAppService.getInstance().addProfile(email, profile);
 				return true;
 			} else {
 				return false;
 			}
 		case GOOGLE:
 			profile.setPassword(null);
-			if (!GoogleLoginAppService.GoogleProfileMap.containsKey(email)) {
-				GoogleLoginAppService.GoogleProfileMap.put(email, profile);
+			if (!GoogleLoginAppService.getInstance().getGoogleProfileMap().containsKey(email)) {
+				GoogleLoginAppService.getInstance().addProfile(email, profile); 
 				return true;
 			} else {
 				return false;
