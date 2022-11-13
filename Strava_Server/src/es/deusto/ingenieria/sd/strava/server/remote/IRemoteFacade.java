@@ -17,19 +17,19 @@ public interface IRemoteFacade extends Remote{
 	public boolean register(String email, String password, String name, Date birthDate, float weight, int height, int maxBpm,
 			int restBpm, ProfileType profileType) throws RemoteException;
 
-	public Timestamp login(String email, String password, ProfileType profileType) throws RemoteException;
+	public long login(String email, String password, ProfileType profileType) throws RemoteException;
 
-	public void logout(Timestamp token) throws RemoteException;
+	public void logout(long token) throws RemoteException;
 
-	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime, Sport sport, Timestamp token) throws RemoteException;
+	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime, Sport sport, long token) throws RemoteException;
 
 	public boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration,
-			Time startTime, Timestamp token) throws RemoteException;
+			Time startTime, long token) throws RemoteException;
 
-	public List<TrainingSessionDTO> getSportTrainingSessions(Sport sport, Timestamp token) throws RemoteException;
+	public List<TrainingSessionDTO> getSportTrainingSessions(Sport sport, long token) throws RemoteException;
 
-	public List<ChallengeDTO> getActiveChallenges(Timestamp token) throws RemoteException;
+	public List<ChallengeDTO> getActiveChallenges(long token) throws RemoteException;
 
-	public boolean acceptChallenge(String name, Timestamp token) throws RemoteException;
+	public boolean acceptChallenge(String name, long token) throws RemoteException;
 	
 }

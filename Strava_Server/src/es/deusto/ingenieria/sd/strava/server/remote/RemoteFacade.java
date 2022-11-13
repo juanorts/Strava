@@ -29,7 +29,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private static final long serialVersionUID = 1L;
 
 	// Data structure for manage Server State
-	public Map<Timestamp, Profile> serverState = new HashMap<>();
+	public Map<Long, Profile> serverState = new HashMap<>();
 
 	public RemoteFacade() throws RemoteException {
 		super();
@@ -49,7 +49,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public Timestamp login(String email, String password, ProfileType profileType) throws RemoteException {
+	public long login(String email, String password, ProfileType profileType) throws RemoteException {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 		Profile profile = new Profile();
 		switch (profileType) {
@@ -68,7 +68,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		if (profile != null) {
 			// If user is not logged in
 			if (!this.serverState.values().contains(profile)) {
-				Timestamp token = new Timestamp(Calendar.getInstance().getTimeInMillis());
+				long token = Calendar.getInstance().getTimeInMillis();
 				this.serverState.put(token, profile);
 				return (token);
 			} else {
@@ -80,7 +80,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public synchronized void logout(Timestamp token) throws RemoteException {
+	public synchronized void logout(long token) throws RemoteException {
 		System.out.println(" * RemoteFacade logout(): " + token);
 
 		if (this.serverState.containsKey(token)) {
@@ -94,10 +94,10 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	@Override
 	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime,
-			Sport sport, Timestamp token) throws RemoteException {
+			Sport sport, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade createChallenge(): " + token);
 		if (this.serverState.containsKey(token)) {
-			return StravaAppService.getInstance().createChallenge(name, startDate, endDate, targetDistance, targetTime, sport, token, this.serverState.get(token));
+			return StravaAppService.getInstance().createChallenge(name, startDate, endDate, targetDistance, targetTime, sport, this.serverState.get(token));
 		} else {
 			throw new RemoteException("User is not not logged in!");
 		}
@@ -105,7 +105,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	@Override
 	public boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration,
-			Time startTime, Timestamp token) throws RemoteException {
+			Time startTime, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade createTrainingSession(): " + token);
 		if (this.serverState.containsKey(token)) {
 			return StravaAppService.getInstance().createTrainingSession(title, sport, distance, startDate, duration, startTime, this.serverState.get(token));
@@ -115,7 +115,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public List<TrainingSessionDTO> getSportTrainingSessions(Sport sport, Timestamp token) throws RemoteException {
+	public List<TrainingSessionDTO> getSportTrainingSessions(Sport sport, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade getSportTrainingSessions(): " + token);
 		if (this.serverState.containsKey(token)) {
 			List<TrainingSession> trainingSessions = StravaAppService.getInstance().getSportTrainingSessions(sport);			
@@ -130,7 +130,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public List<ChallengeDTO> getActiveChallenges(Timestamp token) throws RemoteException {
+	public List<ChallengeDTO> getActiveChallenges(long token) throws RemoteException {
 		System.out.println(" * RemoteFacade getActiveChallenges(): " + token);
 		if (this.serverState.containsKey(token)) {
 			List<Challenge> Active = StravaAppService.getInstance().getActiveChallenges();
@@ -145,7 +145,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	}
 
 	@Override
-	public boolean acceptChallenge(String name, Timestamp token) throws RemoteException {
+	public boolean acceptChallenge(String name, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade acceptChallenge(): " + token);
 		if (this.serverState.containsKey(token)) {
 			Profile p = serverState.get(token);

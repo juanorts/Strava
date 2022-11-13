@@ -25,7 +25,7 @@ public class StravaAppService {
 	}
 
 	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime,
-			Sport sport, Timestamp token, Profile profile) {
+			Sport sport, Profile profile) {
 
 		Challenge challenge = new Challenge(name, startDate, endDate, targetDistance, targetTime, sport);
 		profile.addChallenge(challenge);
