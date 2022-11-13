@@ -16,12 +16,15 @@ import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
 import es.deusto.ingenieria.sd.strava.server.data.domain.ProfileType;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 import es.deusto.ingenieria.sd.strava.server.data.domain.TrainingSession;
+import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionDTO;
 import es.deusto.ingenieria.sd.strava.server.services.FacebookLoginAppService;
 import es.deusto.ingenieria.sd.strava.server.services.GoogleLoginAppService;
 import es.deusto.ingenieria.sd.strava.server.services.StravaLoginAppService;
+import es.deusto.ingenieria.sd.strava.server.services.StravaAppService;
+
 
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	private static final long serialVersionUID = 1L;
@@ -173,13 +176,20 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	@Override
 	public List<ChallengeDTO> getActiveChallenges(Timestamp token) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Challenge> Active = StravaAppService.getActiveChallenges();
+		return ChallengeAssembler.getInstance().challengeToDTO(Active);
 	}
 
 	@Override
 	public boolean acceptChallenge(String name, Timestamp token) {
-		// TODO Auto-generated method stub
+		Profile p = serverState.get(token);
+		List<Challenge> Active = StravaAppService.getActiveChallenges();
+		for(Challenge c : Active) {
+			if(c.getName().equals(name)){
+				StravaAppService.acceptChallenge(p, c);
+				return true;
+			}
+		}
 		return false;
 	}
 
