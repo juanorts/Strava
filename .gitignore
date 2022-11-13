@@ -1,9 +1,5 @@
-
-.metadata/*
-/.metadata/
-Strava_Client/
+.metadata/
 Strava_Client/.classpath
 Strava_Client/.project
-Strava_Server/.classpath
 Strava_Server/.project
 Strava_Server/.classpath
