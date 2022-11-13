@@ -1,6 +1,6 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class TrainingSession {
@@ -9,14 +9,14 @@ public class TrainingSession {
 	private Sport sport;
 	private float distance;
 	private Date startDate;
-	private Time startTime;
+	private LocalTime startTime;
 	private int duration;
 
 	public TrainingSession() {
 		super();
 	}
 
-	public TrainingSession(String title, Sport sport, float distance, int duration, Date startDate, Time startTime) {
+	public TrainingSession(String title, Sport sport, float distance, int duration, Date startDate, LocalTime startTime) {
 		this.setTitle(title);
 		this.setSport(sport);
 		this.setDistance(distance);
@@ -56,11 +56,11 @@ public class TrainingSession {
 		this.duration = duration;
 	}
 
-	public Time getStartTime() {
+	public LocalTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Time startTime) {
+	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
 	}
 

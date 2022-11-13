@@ -2,10 +2,9 @@ package es.deusto.ingenieria.sd.strava.server.remote;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +104,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 
 	@Override
 	public boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration,
-			Time startTime, long token) throws RemoteException {
+			LocalTime startTime, long token) throws RemoteException {
 		System.out.println(" * RemoteFacade createTrainingSession(): " + token);
 		if (this.serverState.containsKey(token)) {
 			return StravaAppService.getInstance().createTrainingSession(title, sport, distance, startDate, duration, startTime, this.serverState.get(token));

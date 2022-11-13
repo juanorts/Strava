@@ -2,8 +2,7 @@ package es.deusto.ingenieria.sd.strava.server.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.sql.Timestamp;
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public interface IRemoteFacade extends Remote{
 	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime, Sport sport, long token) throws RemoteException;
 
 	public boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration,
-			Time startTime, long token) throws RemoteException;
+			LocalTime startTime, long token) throws RemoteException;
 
 	public List<TrainingSessionDTO> getSportTrainingSessions(Sport sport, long token) throws RemoteException;
 

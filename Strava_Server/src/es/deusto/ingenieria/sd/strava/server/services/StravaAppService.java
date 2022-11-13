@@ -1,7 +1,6 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +32,7 @@ public class StravaAppService {
 	}
 
 	public boolean createTrainingSession(String title, Sport sport, float distance, Date startDate, int duration,
-			Time startTime, Profile profile) {
+			LocalTime startTime, Profile profile) {
 
 		TrainingSession trainingSession = new TrainingSession(title, sport, distance, duration, startDate, startTime);
 		profile.addTrainingSession(trainingSession);

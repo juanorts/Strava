@@ -1,5 +1,8 @@
 package es.deusto.ingenieria.sd.strava.server.data.domain;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 //Optional
 public class Progress {
 
@@ -67,7 +70,7 @@ public class Progress {
 		int currentTime = 0;
 
 		for (TrainingSession ts : this.getProfile().getCreatedTrainingSessions()) {
-			int result = ts.getStartTime().compareTo(this.getChallenge().getStartDate());
+			int result = ts.getStartTime().compareTo(LocalDateTime.ofInstant(this.getChallenge().getStartDate().toInstant(), ZoneId.systemDefault()).toLocalTime());
 			if (result >= 0 && distance) {
 				currentDistance += ts.getDistance();
 

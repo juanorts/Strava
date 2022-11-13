@@ -1,7 +1,7 @@
 package es.deusto.ingenieria.sd.strava.server.data.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalTime;
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 
@@ -14,7 +14,7 @@ public class TrainingSessionDTO implements Serializable {
 	private Sport sport;
 	private float distance;
 	private int duration;
-	private Date startTime;
+	private LocalTime startTime;
 	public String getTitle() {
 		return title;
 	}
@@ -39,10 +39,10 @@ public class TrainingSessionDTO implements Serializable {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	public Date getStartTime() {
+	public LocalTime getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
 	}
 	
