@@ -11,7 +11,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RegisterWindow extends JFrame {
+public class RegisterWindow extends JDialog {
 	private JTextField tEmail;
 	private JTextField tPassword;
 	private JTextField tName;
