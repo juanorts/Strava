@@ -1,5 +1,6 @@
 package es.deusto.ingenieria.sd.strava.client.gui;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -11,10 +12,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
 import javax.swing.ScrollPaneConstants;
 
 import es.deusto.ingenieria.sd.strava.client.controller.LoginController;
@@ -22,6 +22,7 @@ import es.deusto.ingenieria.sd.strava.client.controller.StravaController;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 
 public class ChallengesWindow extends JFrame {
+	private static final long serialVersionUID = 1L;
 	public ChallengesWindow(LoginController lController, StravaController sController) {
 		
 		JPanel panel = new JPanel();
@@ -69,8 +70,10 @@ public class ChallengesWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//	Get all active challenges
 				try {
+					
 					int rows = sController.getActiveChallenges().size();
 					pChallenges.setLayout(new GridLayout(rows, 1));
+					pChallenges.removeAll();
 					for(ChallengeDTO c : sController.getActiveChallenges()) {
 						JPanel pChallenge = new JPanel(new FlowLayout());
 						JLabel lChallenge = new JLabel(c.getName() + " - " + c.getSport());
@@ -138,6 +141,21 @@ public class ChallengesWindow extends JFrame {
 				cts.setVisible(true);
 			}
 			
+		});
+		this.addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stud
+				try {
+					lController.logout();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				dispose();
+				
+			}
 		});
 	}
 }

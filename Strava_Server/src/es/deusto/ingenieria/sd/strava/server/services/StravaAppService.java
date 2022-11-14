@@ -1,14 +1,11 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
-import es.deusto.ingenieria.sd.strava.server.data.domain.ProfileType;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 import es.deusto.ingenieria.sd.strava.server.data.domain.TrainingSession;
 

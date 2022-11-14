@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginWindow extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JTextField tEmail;
 	private JTextField tPass;
 

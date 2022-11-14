@@ -1,6 +1,5 @@
 package es.deusto.ingenieria.sd.strava.server.services;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;

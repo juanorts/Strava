@@ -3,8 +3,6 @@ package es.deusto.ingenieria.sd.strava.server.data.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
-
 
 //This class implements DTO pattern
 public class ChallengeDTO implements Serializable {	

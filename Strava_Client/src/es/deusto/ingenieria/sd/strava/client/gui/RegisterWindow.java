@@ -10,8 +10,13 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegisterWindow extends JDialog {
+	private static final long serialVersionUID = 1L;
 	private JTextField tEmail;
 	private JTextField tPassword;
 	private JTextField tName;
@@ -68,8 +73,8 @@ public class RegisterWindow extends JDialog {
 		tPassword.setBounds(146, 204, 202, 26);
 		pMain.add(tPassword);
 
-		JLabel lBirthDate = new JLabel("Birth Date *");
-		lBirthDate.setBounds(146, 242, 74, 16);
+		JLabel lBirthDate = new JLabel("Birth Date (Format dd/MM/yyyy) *");
+		lBirthDate.setBounds(146, 242, 202, 16);
 		pMain.add(lBirthDate);
 
 		tBirthDate = new JTextField();
@@ -148,7 +153,21 @@ public class RegisterWindow extends JDialog {
 					JOptionPane.showMessageDialog(null, "You need to type your email, password, name and birthdate",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-
+					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+					Date date;
+					try {
+						date = (Date) formatter.parse(tBirthDate.getText());
+						controller.register(tEmail.getText(), tPassword.getText(), tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 
@@ -162,7 +181,20 @@ public class RegisterWindow extends JDialog {
 					JOptionPane.showMessageDialog(null, "You need to type your email, name and birthdate",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-
+					try {
+						SimpleDateFormat parser = new SimpleDateFormat("MM dd yyyy");
+				        Date date = parser.parse(tBirthDate.getText());
+						controller.register(tEmail.getText(), null, tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 
@@ -176,7 +208,20 @@ public class RegisterWindow extends JDialog {
 					JOptionPane.showMessageDialog(null, "You need to type your email, name and birthdate",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-
+					try {
+						SimpleDateFormat parser = new SimpleDateFormat("MM dd yyyy");
+				        Date date = parser.parse(tBirthDate.getText());
+						controller.register(tEmail.getText(), null, tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 

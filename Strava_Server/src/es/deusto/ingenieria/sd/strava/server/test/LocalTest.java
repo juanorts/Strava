@@ -4,8 +4,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
-import es.deusto.ingenieria.sd.strava.server.data.domain.ProfileType;
-import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
+
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionDTO;
 import es.deusto.ingenieria.sd.strava.server.remote.RemoteFacade;

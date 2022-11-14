@@ -11,8 +11,6 @@ import java.util.Map;
 
 import es.deusto.ingenieria.sd.strava.server.data.domain.Challenge;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Profile;
-import es.deusto.ingenieria.sd.strava.server.data.domain.ProfileType;
-import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 import es.deusto.ingenieria.sd.strava.server.data.domain.TrainingSession;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;

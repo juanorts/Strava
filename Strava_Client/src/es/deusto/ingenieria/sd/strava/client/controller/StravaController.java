@@ -1,6 +1,6 @@
 package es.deusto.ingenieria.sd.strava.client.controller;
 import java.rmi.RemoteException;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalTime;
 import java.util.List;
 
