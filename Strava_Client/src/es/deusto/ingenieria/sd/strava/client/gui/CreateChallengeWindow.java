@@ -5,9 +5,20 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import java.awt.Color;
 import javax.swing.JTextField;
+
+import es.deusto.ingenieria.sd.strava.client.controller.StravaController;
+
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 
 public class CreateChallengeWindow extends JFrame {
 	private JTextField tfName;
@@ -15,11 +26,13 @@ public class CreateChallengeWindow extends JFrame {
 	private JTextField tfEndDate;
 	private JTextField tfTargetDistance;
 	private JTextField tfTargetTime;
-	public CreateChallengeWindow() {
+	public CreateChallengeWindow(StravaController sController) {
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+		setSize(550, 350);
+		setTitle("Strava - Create new challenge");
 		
 		JLabel logoStrava = new JLabel("STRAVA");
 		logoStrava.setLabelFor(this);
@@ -30,7 +43,7 @@ public class CreateChallengeWindow extends JFrame {
 		
 		JLabel lCreateChallenge = new JLabel("Create Challenge");
 		lCreateChallenge.setFont(new Font("Arial", Font.BOLD, 30));
-		lCreateChallenge.setBounds(208, 18, 257, 37);
+		lCreateChallenge.setBounds(287, 18, 257, 37);
 		panel.add(lCreateChallenge);
 		
 		JLabel lName = new JLabel("Name");
@@ -60,7 +73,7 @@ public class CreateChallengeWindow extends JFrame {
 		
 		JLabel lSport = new JLabel("Sport");
 		lSport.setFont(new Font("Arial", Font.BOLD, 15));
-		lSport.setBounds(42, 261, 77, 25);
+		lSport.setBounds(267, 75, 77, 25);
 		panel.add(lSport);
 		
 		tfName = new JTextField();
@@ -89,7 +102,30 @@ public class CreateChallengeWindow extends JFrame {
 		panel.add(tfTargetTime);
 		
 		JComboBox cSport = new JComboBox();
-		cSport.setBounds(42, 288, 137, 21);
+		cSport.setModel(new DefaultComboBoxModel(new String[] {"CYCLING", "RUNNING", "BOTH"}));
+		cSport.setBounds(267, 98, 137, 21);
 		panel.add(cSport);
+		
+		JButton bCreate = new JButton("Create new challenge");
+		bCreate.setBounds(42, 261, 169, 29);
+		panel.add(bCreate);
+		
+		bCreate.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+				Date date1;
+				try {
+					date1 = (Date) formatter.parse(tfStartDate.getText());
+					Date date2 = (Date) formatter.parse(tfEndDate.getText());
+					sController.createChallenge(tfName.getText(), date1, date2, Float.parseFloat(tfTargetDistance.getText()), Integer.parseInt(tfTargetTime.getText()), cSport.getSelectedItem().toString());
+				} catch (ParseException | NumberFormatException | RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
 	}
 }

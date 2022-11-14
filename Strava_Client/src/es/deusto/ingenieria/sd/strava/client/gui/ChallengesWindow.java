@@ -17,24 +17,17 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.ScrollPaneConstants;
 
+import es.deusto.ingenieria.sd.strava.client.controller.LoginController;
 import es.deusto.ingenieria.sd.strava.client.controller.StravaController;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 
 public class ChallengesWindow extends JFrame {
-	public ChallengesWindow(StravaController sController) {
+	public ChallengesWindow(LoginController lController, StravaController sController) {
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		setSize(520, 390);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(90, 95, 338, 214);
-		panel.add(scrollPane);
-		
-		JPanel pChallenges = new JPanel();
-		scrollPane.add(pChallenges);
 		
 		JLabel lStrava = new JLabel("STRAVA");
 		lStrava.setFont(new Font("Arial", Font.BOLD, 40));
@@ -51,17 +44,24 @@ public class ChallengesWindow extends JFrame {
 		bRefresh.setBounds(37, 321, 117, 29);
 		panel.add(bRefresh);
 		
-		JButton btnNewButton_1 = new JButton("Create new challenge");
-		btnNewButton_1.setBounds(157, 321, 161, 29);
-		panel.add(btnNewButton_1);
-		
-		JButton bC = new JButton("Create training session");
-		bC.setBounds(312, 321, 170, 29);
+		JButton bC = new JButton("Create new challenge");
+		bC.setBounds(157, 321, 161, 29);
 		panel.add(bC);
+		
+		JButton bTS = new JButton("Create training session");
+		bTS.setBounds(312, 321, 170, 29);
+		panel.add(bTS);
 		
 		JButton bLogout = new JButton("Log Out");
 		bLogout.setBounds(10, 54, 117, 29);
 		panel.add(bLogout);
+		
+		JPanel pChallenges = new JPanel();
+		
+		JScrollPane scrollPane = new JScrollPane(pChallenges);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(37, 95, 448, 214);
+		panel.add(scrollPane);
 		
 		bRefresh.addActionListener(new ActionListener() {
 
@@ -70,20 +70,31 @@ public class ChallengesWindow extends JFrame {
 				//	Get all active challenges
 				try {
 					int rows = sController.getActiveChallenges().size();
-					System.out.println(rows);
-					pChallenges.setLayout(new FlowLayout());
+					pChallenges.setLayout(new GridLayout(rows, 1));
 					for(ChallengeDTO c : sController.getActiveChallenges()) {
-						System.out.println(c.getName());
-						JPanel pChallenge = new JPanel();
-						JLabel lChallenge = new JLabel();
+						JPanel pChallenge = new JPanel(new FlowLayout());
+						JLabel lChallenge = new JLabel(c.getName() + " - " + c.getSport());
+						JButton bAccept = new JButton("Accept challenge");
+						bAccept.addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent arg0) {
+								try {
+									sController.acceptChallenge(c.getName());
+								} catch (RemoteException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							
+						});
 						pChallenge.add(lChallenge);
+						pChallenge.add(bAccept);
 						pChallenges.add(pChallenge);
 					}
-					scrollPane.add(pChallenges);
-					pChallenges.setVisible(true);
 					scrollPane.setVisible(true);
-					repaint();
-					revalidate();
+					scrollPane.repaint();
+					scrollPane.revalidate();
 					
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
@@ -94,6 +105,39 @@ public class ChallengesWindow extends JFrame {
 			
 		});
 		
+		bLogout.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					lController.logout();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				dispose();
+			}
+			
+		});
 		
+		bC.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CreateChallengeWindow ccw = new CreateChallengeWindow(sController);
+				ccw.setVisible(true);
+			}
+			
+		});
+		
+		bTS.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CreateTrainingSessionWindow cts = new CreateTrainingSessionWindow(sController);
+				cts.setVisible(true);
+			}
+			
+		});
 	}
 }

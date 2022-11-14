@@ -5,21 +5,36 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.awt.Color;
 import javax.swing.JTextField;
+
+import es.deusto.ingenieria.sd.strava.client.controller.StravaController;
+
 import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 
 public class CreateTrainingSessionWindow extends JFrame{
 	private JTextField tfTitle;
 	private JTextField tfStartDate;
 	private JTextField tfDistance;
 	private JTextField tfStartTime;
-	private JTextField tfDistance_1;
-	public CreateTrainingSessionWindow() {
+	private JTextField tfDuration;
+	public CreateTrainingSessionWindow(StravaController sController) {
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+		setSize(550, 350);
+		setTitle("Strava - Create new training session");
 		
 		JLabel lStrava = new JLabel("STRAVA");
 		lStrava.setForeground(new Color(255, 128, 0));
@@ -28,9 +43,10 @@ public class CreateTrainingSessionWindow extends JFrame{
 		panel.add(lStrava);
 		
 		JLabel lCreateTrainingSession = new JLabel("Create Training Session");
+		lCreateTrainingSession.setHorizontalAlignment(SwingConstants.RIGHT);
 		lCreateTrainingSession.setFont(new Font("Arial", Font.BOLD, 30));
 		lCreateTrainingSession.setForeground(new Color(0, 0, 0));
-		lCreateTrainingSession.setBounds(187, 23, 385, 36);
+		lCreateTrainingSession.setBounds(187, 23, 357, 36);
 		panel.add(lCreateTrainingSession);
 		
 		JLabel lStartDate = new JLabel("Title");
@@ -55,7 +71,7 @@ public class CreateTrainingSessionWindow extends JFrame{
 		
 		JLabel lSport = new JLabel("Sport");
 		lSport.setFont(new Font("Arial", Font.BOLD, 15));
-		lSport.setBounds(47, 285, 72, 23);
+		lSport.setBounds(289, 97, 72, 23);
 		panel.add(lSport);
 		
 		JLabel lStartTime_1 = new JLabel("Start Time");
@@ -83,14 +99,36 @@ public class CreateTrainingSessionWindow extends JFrame{
 		tfStartTime.setBounds(289, 183, 125, 19);
 		panel.add(tfStartTime);
 		
-		tfDistance_1 = new JTextField();
-		tfDistance_1.setColumns(10);
-		tfDistance_1.setBounds(289, 243, 125, 19);
-		panel.add(tfDistance_1);
+		tfDuration = new JTextField();
+		tfDuration.setColumns(10);
+		tfDuration.setBounds(289, 243, 125, 19);
+		panel.add(tfDuration);
 		
 		JComboBox cSport = new JComboBox();
-		cSport.setBounds(47, 318, 125, 21);
+		cSport.setModel(new DefaultComboBoxModel(new String[] {"CYCLING", "RUNNING", "BOTH"}));
+		cSport.setBounds(289, 123, 125, 21);
 		panel.add(cSport);
+		
+		JButton bCreate = new JButton("Create training session");
+		bCreate.setBounds(47, 287, 180, 29);
+		panel.add(bCreate);
+		
+		bCreate.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+				Date date;
+				try {
+					date = (Date) formatter.parse(tfStartDate.getText());
+					sController.createTrainingSession(tfTitle.getText(), cSport.getSelectedItem().toString(), Float.parseFloat(tfDistance.getText()), date, Integer.parseInt(tfDuration.getText()), LocalTime.parse(tfStartTime.getText()));
+				} catch (ParseException | NumberFormatException | RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
 	}
 
 }
