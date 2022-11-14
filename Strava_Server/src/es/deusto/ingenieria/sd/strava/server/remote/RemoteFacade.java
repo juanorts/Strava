@@ -127,9 +127,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public List<ChallengeDTO> getActiveChallenges(long token) throws RemoteException {
 		System.out.println(" * RemoteFacade getActiveChallenges(): " + token);
 		if (this.serverState.containsKey(token)) {
-			List<Challenge> Active = StravaAppService.getInstance().getActiveChallenges();
-			if (!Active.isEmpty()) {
-				return ChallengeAssembler.getInstance().challengeToDTO(Active);
+			List<Challenge> active = StravaAppService.getInstance().getActiveChallenges();
+			if (!active.isEmpty()) {
+				return ChallengeAssembler.getInstance().challengeToDTO(active);
 			} else {
 				throw new RemoteException("There are no active challenges");
 			}
@@ -143,8 +143,8 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 		System.out.println(" * RemoteFacade acceptChallenge(): " + token);
 		if (this.serverState.containsKey(token)) {
 			Profile p = serverState.get(token);
-			List<Challenge> Active = StravaAppService.getInstance().getActiveChallenges();
-			for (Challenge c : Active) {
+			List<Challenge> active = StravaAppService.getInstance().getActiveChallenges();
+			for (Challenge c : active) {
 				if (c.getName().equals(name)) {
 					StravaAppService.getInstance().acceptChallenge(p, c);
 					return true;

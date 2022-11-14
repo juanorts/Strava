@@ -15,7 +15,7 @@ public class ChallengeDTO implements Serializable {
 	private Date endDate;
 	private float targetDistance;
 	private int targetTime;
-	private Sport sport;
+	private String sport;
 	
 	public String getName() {
 		return name;
@@ -47,10 +47,10 @@ public class ChallengeDTO implements Serializable {
 	public void setTargetTime(int targetTime) {
 		this.targetTime = targetTime;
 	}
-	public Sport getSport() {
+	public String getSport() {
 		return sport;
 	}
-	public void setSport(Sport sport) {
+	public void setSport(String sport) {
 		this.sport = sport;
 	}
 	

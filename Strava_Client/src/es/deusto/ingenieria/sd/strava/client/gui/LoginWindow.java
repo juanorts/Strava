@@ -86,7 +86,7 @@ public class LoginWindow extends JFrame {
 				} else {
 					boolean login = lController.login(tEmail.getText(), tPass.getText(), "STRAVA");
 					if (login) {
-						ChallengesWindow cw = new ChallengesWindow();
+						ChallengesWindow cw = new ChallengesWindow(sController);
 						cw.setVisible(true);
 						dispose();
 					} else {
@@ -108,7 +108,7 @@ public class LoginWindow extends JFrame {
 				} else {
 					boolean login = lController.login(tEmail.getText(), tPass.getText(), "GOOGLE");
 					if (login) {
-						ChallengesWindow cw = new ChallengesWindow();
+						ChallengesWindow cw = new ChallengesWindow(sController);
 						cw.setVisible(true);
 						dispose();
 					} else {
@@ -130,7 +130,7 @@ public class LoginWindow extends JFrame {
 				} else {
 					boolean login = lController.login(tEmail.getText(), tPass.getText(), "FACEBOOK");
 					if (login) {
-						ChallengesWindow cw = new ChallengesWindow();
+						ChallengesWindow cw = new ChallengesWindow(sController);
 						cw.setVisible(true);
 						dispose();
 					} else {

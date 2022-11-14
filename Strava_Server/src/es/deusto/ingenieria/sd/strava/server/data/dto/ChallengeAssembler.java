@@ -27,7 +27,7 @@ public class ChallengeAssembler {
 		dto.setEndDate(challenge.getEndDate());
 		dto.setTargetDistance(challenge.getTargetDistance());
 		dto.setTargetTime(challenge.getTargetTime());
-		dto.setSport(challenge.getSport());
+		dto.setSport(challenge.getSport().name());
 		
 		return dto;
 	}
