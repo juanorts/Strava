@@ -3,9 +3,6 @@ package es.deusto.ingenieria.sd.strava.client.gui;
 import javax.swing.*;
 
 import es.deusto.ingenieria.sd.strava.client.controller.LoginController;
-import es.deusto.ingenieria.sd.strava.client.controller.RegisterController;
-import es.deusto.ingenieria.sd.strava.client.controller.StravaController;
-
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -18,7 +15,7 @@ public class LoginWindow extends JFrame {
 	private JTextField tEmail;
 	private JTextField tPass;
 
-	public LoginWindow(LoginController lController, RegisterController rController, StravaController sController) {
+	public LoginWindow() {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Strava - Login");
@@ -85,9 +82,9 @@ public class LoginWindow extends JFrame {
 					JOptionPane.showMessageDialog(null, "You need to type an email and a password", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					boolean login = lController.login(tEmail.getText(), tPass.getText(), "STRAVA");
+					boolean login = LoginController.getInstance().login(tEmail.getText(), tPass.getText(), "STRAVA");
 					if (login) {
-						ChallengesWindow cw = new ChallengesWindow(lController, sController);
+						ChallengesWindow cw = new ChallengesWindow();
 						cw.setVisible(true);
 						dispose();
 					} else {
@@ -107,9 +104,9 @@ public class LoginWindow extends JFrame {
 					JOptionPane.showMessageDialog(null, "You need to type an email and a password", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					boolean login = lController.login(tEmail.getText(), tPass.getText(), "GOOGLE");
+					boolean login = LoginController.getInstance().login(tEmail.getText(), tPass.getText(), "GOOGLE");
 					if (login) {
-						ChallengesWindow cw = new ChallengesWindow(lController, sController);
+						ChallengesWindow cw = new ChallengesWindow();
 						cw.setVisible(true);
 						dispose();
 					} else {
@@ -129,9 +126,9 @@ public class LoginWindow extends JFrame {
 					JOptionPane.showMessageDialog(null, "You need to type an email and a password", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					boolean login = lController.login(tEmail.getText(), tPass.getText(), "FACEBOOK");
+					boolean login = LoginController.getInstance().login(tEmail.getText(), tPass.getText(), "FACEBOOK");
 					if (login) {
-						ChallengesWindow cw = new ChallengesWindow(lController, sController);
+						ChallengesWindow cw = new ChallengesWindow();
 						cw.setVisible(true);
 						dispose();
 					} else {
@@ -147,7 +144,7 @@ public class LoginWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				RegisterWindow rw = new RegisterWindow(rController);
+				RegisterWindow rw = new RegisterWindow();
 				rw.setVisible(true);
 			}
 

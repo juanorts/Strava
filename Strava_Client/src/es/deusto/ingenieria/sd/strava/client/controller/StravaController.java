@@ -9,25 +9,34 @@ import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionDTO;
 
 public class StravaController {
-	private ServiceLocator serviceLocator;
 	
-	public StravaController(ServiceLocator serviceLocator) {
-		this.serviceLocator = serviceLocator; 
+	private static StravaController instance;
+	
+	private StravaController() {
 	}
+	
+	public static StravaController getInstance() {
+		if (instance == null) {
+			instance = new StravaController();
+		}
+
+		return instance;
+	}
+	
 	public boolean createChallenge(String name, Date startDate, Date endDate, float targetDistance, int targetTime, String sport) throws RemoteException{
-		return this.serviceLocator.getService().createChallenge(name, startDate, endDate, targetDistance, targetTime, sport, LoginController.token);
+		return ServiceLocator.getInstance().getService().createChallenge(name, startDate, endDate, targetDistance, targetTime, sport, LoginController.getInstance().getToken());
 	}
 	public boolean createTrainingSession(String title, String sport, float distance, Date startDate, int duration, LocalTime startTime) throws RemoteException {
-		return this.serviceLocator.getService().createTrainingSession(title, sport, distance, startDate, duration, startTime, LoginController.token);
+		return ServiceLocator.getInstance().getService().createTrainingSession(title, sport, distance, startDate, duration, startTime, LoginController.getInstance().getToken());
 	}
 	public List<TrainingSessionDTO> getSportTrainingSessions(String sport) throws RemoteException{
-		return this.serviceLocator.getService().getSportTrainingSessions(sport, LoginController.token);
+		return ServiceLocator.getInstance().getService().getSportTrainingSessions(sport, LoginController.getInstance().getToken());
 	}
 	public List<ChallengeDTO> getActiveChallenges() throws RemoteException{
-		return this.serviceLocator.getService().getActiveChallenges(LoginController.token);
+		return ServiceLocator.getInstance().getService().getActiveChallenges(LoginController.getInstance().getToken());
 	}
 	public boolean acceptChallenge(String name) throws RemoteException {
-		return this.serviceLocator.getService().acceptChallenge(name, LoginController.token);
+		return ServiceLocator.getInstance().getService().acceptChallenge(name, LoginController.getInstance().getToken());
 	}
 	
 	

@@ -4,15 +4,23 @@ import java.rmi.RemoteException;
 import es.deusto.ingenieria.sd.strava.client.remote.ServiceLocator;
 
 public class LoginController {
-	public static long token;
-	private ServiceLocator serviceLocator;
+	private long token;
+	private static LoginController instance;
 	
-	public LoginController(ServiceLocator serviceLocator) {
-		this.serviceLocator = serviceLocator; 
+	private LoginController() {
 	}
+	
+	public static LoginController getInstance() {
+		if (instance == null) {
+			instance = new LoginController();
+		}
+
+		return instance;
+	}
+	
 	public boolean login(String email, String password, String profileType) {
 		try {
-			token = this.serviceLocator.getService().login(email, password, profileType);		
+			token = ServiceLocator.getInstance().getService().login(email, password, profileType);		
 			return true;
 		} catch (RemoteException e) {
 			System.out.println("# Error during login: " + e);
@@ -20,8 +28,15 @@ public class LoginController {
 			return false;
 		}
 	}
+	
+	
+	
+	public void setToken(long token) {
+		this.token = token;
+	}
+
 	public void logout() throws RemoteException {
-		this.serviceLocator.getService().logout(token);
+		ServiceLocator.getInstance().getService().logout(token);
 	}
 	
 	public long getToken() {

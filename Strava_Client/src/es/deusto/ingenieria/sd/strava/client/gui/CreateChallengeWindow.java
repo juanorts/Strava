@@ -30,7 +30,7 @@ public class CreateChallengeWindow extends JFrame {
 	private JTextField tfTargetDistance;
 	private JTextField tfTargetTime;
 
-	public CreateChallengeWindow(StravaController sController) {
+	public CreateChallengeWindow() {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JPanel panel = new JPanel();
@@ -135,7 +135,7 @@ public class CreateChallengeWindow extends JFrame {
 					try {
 						date1 = (Date) formatter.parse(tfStartDate.getText());
 						Date date2 = (Date) formatter.parse(tfEndDate.getText());
-						if (sController.createChallenge(tfName.getText(), date1, date2,
+						if (StravaController.getInstance().createChallenge(tfName.getText(), date1, date2,
 								Float.parseFloat(tfTargetDistance.getText()), Integer.parseInt(tfTargetTime.getText()),
 								cSport.getSelectedItem().toString())) {
 							dispose();

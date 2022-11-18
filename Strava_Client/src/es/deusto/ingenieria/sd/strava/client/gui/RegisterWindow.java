@@ -26,7 +26,7 @@ public class RegisterWindow extends JDialog {
 	private JTextField tMaxBPM;
 	private JTextField tRestBPM;
 
-	public RegisterWindow(RegisterController controller) {
+	public RegisterWindow() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Strava - Register");
 		getContentPane().setForeground(Color.WHITE);
@@ -157,7 +157,7 @@ public class RegisterWindow extends JDialog {
 					Date date;
 					try {
 						date = (Date) formatter.parse(tBirthDate.getText());
-						controller.register(tEmail.getText(), tPassword.getText(), tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+						RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -184,7 +184,7 @@ public class RegisterWindow extends JDialog {
 					try {
 						SimpleDateFormat parser = new SimpleDateFormat("MM dd yyyy");
 				        Date date = parser.parse(tBirthDate.getText());
-						controller.register(tEmail.getText(), null, tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+				        RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -211,7 +211,7 @@ public class RegisterWindow extends JDialog {
 					try {
 						SimpleDateFormat parser = new SimpleDateFormat("MM dd yyyy");
 				        Date date = parser.parse(tBirthDate.getText());
-						controller.register(tEmail.getText(), null, tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+						RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

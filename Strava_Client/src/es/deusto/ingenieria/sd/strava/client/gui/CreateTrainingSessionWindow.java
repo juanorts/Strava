@@ -32,7 +32,7 @@ public class CreateTrainingSessionWindow extends JFrame {
 	private JTextField tfStartTime;
 	private JTextField tfDuration;
 
-	public CreateTrainingSessionWindow(StravaController sController) {
+	public CreateTrainingSessionWindow() {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JPanel panel = new JPanel();
@@ -136,7 +136,7 @@ public class CreateTrainingSessionWindow extends JFrame {
 					Date date;
 					try {
 						date = (Date) formatter.parse(tfStartDate.getText());
-						if (sController.createTrainingSession(tfTitle.getText(), cSport.getSelectedItem().toString(),
+						if (StravaController.getInstance().createTrainingSession(tfTitle.getText(), cSport.getSelectedItem().toString(),
 								Float.parseFloat(tfDistance.getText()), date, Integer.parseInt(tfDuration.getText()),
 								LocalTime.parse(tfStartTime.getText()))) {
 							dispose();

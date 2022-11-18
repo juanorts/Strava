@@ -23,7 +23,7 @@ import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 
 public class ChallengesWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
-	public ChallengesWindow(LoginController lController, StravaController sController) {
+	public ChallengesWindow() {
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -71,10 +71,10 @@ public class ChallengesWindow extends JFrame {
 				//	Get all active challenges
 				try {
 					
-					int rows = sController.getActiveChallenges().size();
+					int rows = StravaController.getInstance().getActiveChallenges().size();
 					pChallenges.setLayout(new GridLayout(rows, 1));
 					pChallenges.removeAll();
-					for(ChallengeDTO c : sController.getActiveChallenges()) {
+					for(ChallengeDTO c : StravaController.getInstance().getActiveChallenges()) {
 						JPanel pChallenge = new JPanel(new FlowLayout());
 						JLabel lChallenge = new JLabel(c.getName() + " - " + c.getSport());
 						JButton bAccept = new JButton("Accept challenge");
@@ -83,7 +83,7 @@ public class ChallengesWindow extends JFrame {
 							@Override
 							public void actionPerformed(ActionEvent arg0) {
 								try {
-									sController.acceptChallenge(c.getName());
+									StravaController.getInstance().acceptChallenge(c.getName());
 								} catch (RemoteException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -113,7 +113,7 @@ public class ChallengesWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					lController.logout();
+					LoginController.getInstance().logout();
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -127,7 +127,7 @@ public class ChallengesWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CreateChallengeWindow ccw = new CreateChallengeWindow(sController);
+				CreateChallengeWindow ccw = new CreateChallengeWindow();
 				ccw.setVisible(true);
 			}
 			
@@ -137,7 +137,7 @@ public class ChallengesWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CreateTrainingSessionWindow cts = new CreateTrainingSessionWindow(sController);
+				CreateTrainingSessionWindow cts = new CreateTrainingSessionWindow();
 				cts.setVisible(true);
 			}
 			
@@ -148,7 +148,7 @@ public class ChallengesWindow extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				// TODO Auto-generated method stud
 				try {
-					lController.logout();
+					LoginController.getInstance().logout();
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
