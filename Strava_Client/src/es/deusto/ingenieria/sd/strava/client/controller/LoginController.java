@@ -20,7 +20,8 @@ public class LoginController {
 	
 	public boolean login(String email, String password, String profileType) {
 		try {
-			token = ServiceLocator.getInstance().getService().login(email, password, profileType);		
+			token = ServiceLocator.getInstance().getService().login(email, password, profileType);	
+			LoginController.getInstance().setToken(token);
 			return true;
 		} catch (RemoteException e) {
 			System.out.println("# Error during login: " + e);
