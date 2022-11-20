@@ -10,9 +10,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.awt.Color;
 import javax.swing.JTextField;
 
@@ -21,12 +18,11 @@ import es.deusto.ingenieria.sd.strava.client.controller.StravaController;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import com.toedter.calendar.JDateChooser;
 
 public class CreateChallengeWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfName;
-	private JTextField tfStartDate;
-	private JTextField tfEndDate;
 	private JTextField tfTargetDistance;
 	private JTextField tfTargetTime;
 
@@ -56,12 +52,12 @@ public class CreateChallengeWindow extends JFrame {
 		lName.setBounds(42, 75, 77, 25);
 		panel.add(lName);
 
-		JLabel lStartDate = new JLabel("Start Date *");
+		JLabel lStartDate = new JLabel("Start Date");
 		lStartDate.setFont(new Font("Arial", Font.BOLD, 15));
 		lStartDate.setBounds(42, 131, 94, 25);
 		panel.add(lStartDate);
 
-		JLabel lEndDate = new JLabel("End Date *");
+		JLabel lEndDate = new JLabel("End Date");
 		lEndDate.setFont(new Font("Arial", Font.BOLD, 15));
 		lEndDate.setBounds(267, 131, 77, 25);
 		panel.add(lEndDate);
@@ -86,15 +82,15 @@ public class CreateChallengeWindow extends JFrame {
 		panel.add(tfName);
 		tfName.setColumns(10);
 
-		tfStartDate = new JTextField();
-		tfStartDate.setColumns(10);
-		tfStartDate.setBounds(42, 154, 137, 19);
-		panel.add(tfStartDate);
-
-		tfEndDate = new JTextField();
-		tfEndDate.setColumns(10);
-		tfEndDate.setBounds(267, 154, 137, 19);
-		panel.add(tfEndDate);
+		JDateChooser dateChooserSD = new JDateChooser();
+		dateChooserSD.setDateFormatString("dd/MM/yyyy");
+		dateChooserSD.setBounds(42, 162, 137, 20);
+		panel.add(dateChooserSD);
+		
+		JDateChooser dateChooserED = new JDateChooser();
+		dateChooserED.setDateFormatString("dd/MM/yyyy");
+		dateChooserED.setBounds(267, 162, 137, 20);
+		panel.add(dateChooserED);
 
 		tfTargetDistance = new JTextField();
 		tfTargetDistance.setColumns(10);
@@ -115,32 +111,27 @@ public class CreateChallengeWindow extends JFrame {
 		bCreate.setBounds(42, 261, 169, 29);
 		panel.add(bCreate);
 
-		JLabel lblNewLabel = new JLabel("*Date Format = dd/MM/yyyy");
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 15));
-		lblNewLabel.setBounds(221, 262, 215, 25);
-		panel.add(lblNewLabel);
 
 		bCreate.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (tfName.getText().isEmpty() || tfEndDate.getText().isEmpty() || tfStartDate.getText().isEmpty()
+				if (tfName.getText().isEmpty() || dateChooserSD.getDate() == null || dateChooserED.getDate() == null
 						|| tfTargetDistance.getText().isEmpty() || tfTargetTime.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null,
 							"You need to to complete all the information. If you only want to set a target distance/time, type 0 in the other one",
 							"Error", JOptionPane.ERROR_MESSAGE);
-				} else {
-					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-					Date date1;
+				}else if (dateChooserSD.getDate().compareTo(dateChooserED.getDate())>=0) {
+					JOptionPane.showMessageDialog(null, "The start date must be before the end date", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}else {
 					try {
-						date1 = (Date) formatter.parse(tfStartDate.getText());
-						Date date2 = (Date) formatter.parse(tfEndDate.getText());
-						if (StravaController.getInstance().createChallenge(tfName.getText(), date1, date2,
+						if (StravaController.getInstance().createChallenge(tfName.getText(), dateChooserSD.getDate(), dateChooserED.getDate(),
 								Float.parseFloat(tfTargetDistance.getText()), Integer.parseInt(tfTargetTime.getText()),
 								cSport.getSelectedItem().toString())) {
 							dispose();
 						}
-					} catch (ParseException | NumberFormatException | RemoteException e) {
+					} catch (NumberFormatException | RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

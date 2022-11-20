@@ -11,16 +11,13 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.toedter.calendar.JDateChooser;
 
 public class RegisterWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTextField tEmail;
 	private JTextField tPassword;
 	private JTextField tName;
-	private JTextField tBirthDate;
 	private JTextField tWeight;
 	private JTextField tHeight;
 	private JTextField tMaxBPM;
@@ -73,14 +70,14 @@ public class RegisterWindow extends JDialog {
 		tPassword.setBounds(146, 204, 202, 26);
 		pMain.add(tPassword);
 
-		JLabel lBirthDate = new JLabel("Birth Date (Format dd/MM/yyyy) *");
+		JLabel lBirthDate = new JLabel("Birth Date *");
 		lBirthDate.setBounds(146, 242, 202, 16);
 		pMain.add(lBirthDate);
-
-		tBirthDate = new JTextField();
-		tBirthDate.setBounds(146, 270, 202, 26);
-		pMain.add(tBirthDate);
-		tBirthDate.setColumns(10);
+		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setDateFormatString("dd/MM/yyyy");
+		dateChooser.setBounds(146, 269, 202, 20);
+		pMain.add(dateChooser);
 
 		JLabel lWeight = new JLabel("Weight");
 		lWeight.setBounds(146, 308, 61, 16);
@@ -141,6 +138,7 @@ public class RegisterWindow extends JDialog {
 		lMessage2.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		lMessage2.setBounds(109, 593, 283, 16);
 		pMain.add(lMessage2);
+		
 
 		// Actions
 
@@ -149,22 +147,17 @@ public class RegisterWindow extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (tEmail.getText().isEmpty() || tPassword.getText().isEmpty() || tName.getText().isEmpty()
-						|| tBirthDate.getText().isEmpty()) {
+						|| dateChooser.getDate() == null) {
 					JOptionPane.showMessageDialog(null, "You need to type your email, password, name and birthdate",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-					Date date;
+					
 					try {
-						date = (Date) formatter.parse(tBirthDate.getText());
-						RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+						RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), dateChooser.getDate(),  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -177,21 +170,16 @@ public class RegisterWindow extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (tEmail.getText().isEmpty() || tName.getText().isEmpty() || tBirthDate.getText().isEmpty()) {
+				if (tEmail.getText().isEmpty() || tName.getText().isEmpty() || dateChooser.getDate() == null) {
 					JOptionPane.showMessageDialog(null, "You need to type your email, name and birthdate",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-						SimpleDateFormat parser = new SimpleDateFormat("MM dd yyyy");
-				        Date date = parser.parse(tBirthDate.getText());
-				        RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+				        RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), dateChooser.getDate(),  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -204,21 +192,16 @@ public class RegisterWindow extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (tEmail.getText().isEmpty() || tName.getText().isEmpty() || tBirthDate.getText().isEmpty()) {
+				if (tEmail.getText().isEmpty() || tName.getText().isEmpty() || dateChooser.getDate() == null) {
 					JOptionPane.showMessageDialog(null, "You need to type your email, name and birthdate",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-						SimpleDateFormat parser = new SimpleDateFormat("MM dd yyyy");
-				        Date date = parser.parse(tBirthDate.getText());
-						RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), date,  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+						RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), dateChooser.getDate(),  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (ParseException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

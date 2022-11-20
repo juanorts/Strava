@@ -10,9 +10,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -23,11 +20,11 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import com.toedter.calendar.JDateChooser;
 
 public class CreateTrainingSessionWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField tfTitle;
-	private JTextField tfStartDate;
 	private JTextField tfDistance;
 	private JTextField tfStartTime;
 	private JTextField tfDuration;
@@ -89,10 +86,10 @@ public class CreateTrainingSessionWindow extends JFrame {
 		panel.add(tfTitle);
 		tfTitle.setColumns(10);
 
-		tfStartDate = new JTextField();
-		tfStartDate.setColumns(10);
-		tfStartDate.setBounds(47, 183, 125, 19);
-		panel.add(tfStartDate);
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setDateFormatString("dd/MM/yyyy");
+		dateChooser.setBounds(47, 183, 125, 20);
+		panel.add(dateChooser);
 
 		tfDistance = new JTextField();
 		tfDistance.setColumns(10);
@@ -117,31 +114,23 @@ public class CreateTrainingSessionWindow extends JFrame {
 		JButton bCreate = new JButton("Create training session");
 		bCreate.setBounds(47, 287, 180, 29);
 		panel.add(bCreate);
-
-		JLabel lblNewLabel = new JLabel("* Date Format = dd/MM/yyyy");
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 15));
-		lblNewLabel.setBounds(237, 290, 213, 21);
-		panel.add(lblNewLabel);
-
+		
 		bCreate.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (tfDistance.getText().isEmpty() || tfDuration.getText().isEmpty() || tfStartDate.getText().isEmpty()
+				if (tfDistance.getText().isEmpty() || tfDuration.getText().isEmpty() || dateChooser.getDate() == null
 						|| tfTitle.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "You need to to complete all the information.", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-					Date date;
 					try {
-						date = (Date) formatter.parse(tfStartDate.getText());
 						if (StravaController.getInstance().createTrainingSession(tfTitle.getText(), cSport.getSelectedItem().toString(),
-								Float.parseFloat(tfDistance.getText()), date, Integer.parseInt(tfDuration.getText()),
+								Float.parseFloat(tfDistance.getText()), dateChooser.getDate(), Integer.parseInt(tfDuration.getText()),
 								LocalTime.parse(tfStartTime.getText()))) {
 							dispose();
 						}
-					} catch (ParseException | NumberFormatException | RemoteException e) {
+					} catch (NumberFormatException | RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -150,5 +139,4 @@ public class CreateTrainingSessionWindow extends JFrame {
 
 		});
 	}
-
 }
