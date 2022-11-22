@@ -153,7 +153,7 @@ public class RegisterWindow extends JDialog {
 				} else {
 					
 					try {
-						RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), dateChooser.getDate(),  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+						RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "STRAVA");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -175,7 +175,7 @@ public class RegisterWindow extends JDialog {
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-				        RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), dateChooser.getDate(),  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+				        RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "GOOGLE");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -197,7 +197,7 @@ public class RegisterWindow extends JDialog {
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-						RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), dateChooser.getDate(),  Float.parseFloat(tWeight.getText()), Integer.parseInt(tHeight.getText()), Integer.parseInt(tMaxBPM.getText()), Integer.parseInt(tRestBPM.getText()), "STRAVA");
+						RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "FACEBOOK");
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
