@@ -1,4 +1,1 @@
-- Crear TestLocal del Server
-- Terminar de implementar metodos RemoteFacade
-- Modificar diagramas para hacer que a través de LoginWindow se acceda al Registro con RegisterDialog
 - Añadir clases ProgressDTO y ProgressAssembler a data.dto (OPCIONAL)
