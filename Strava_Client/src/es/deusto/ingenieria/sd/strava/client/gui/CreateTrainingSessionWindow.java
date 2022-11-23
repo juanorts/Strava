@@ -20,6 +20,8 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+
+import com.raven.swing.TimePicker;
 import com.toedter.calendar.JDateChooser;
 
 public class CreateTrainingSessionWindow extends JFrame {
@@ -56,7 +58,7 @@ public class CreateTrainingSessionWindow extends JFrame {
 		lStartDate.setBounds(47, 97, 72, 23);
 		panel.add(lStartDate);
 
-		JLabel lStartTime = new JLabel("Start Date *");
+		JLabel lStartTime = new JLabel("Start Date");
 		lStartTime.setFont(new Font("Arial", Font.BOLD, 15));
 		lStartTime.setBounds(47, 162, 87, 23);
 		panel.add(lStartTime);
@@ -76,7 +78,7 @@ public class CreateTrainingSessionWindow extends JFrame {
 		lSport.setBounds(289, 97, 72, 23);
 		panel.add(lSport);
 
-		JLabel lStartTime_1 = new JLabel("Start Time *");
+		JLabel lStartTime_1 = new JLabel("Start Time");
 		lStartTime_1.setFont(new Font("Arial", Font.BOLD, 15));
 		lStartTime_1.setBounds(288, 162, 93, 23);
 		panel.add(lStartTime_1);
@@ -98,6 +100,7 @@ public class CreateTrainingSessionWindow extends JFrame {
 
 		tfStartTime = new JTextField();
 		tfStartTime.setColumns(10);
+		tfStartTime.setEditable(false);
 		tfStartTime.setBounds(289, 183, 125, 19);
 		panel.add(tfStartTime);
 
@@ -114,6 +117,35 @@ public class CreateTrainingSessionWindow extends JFrame {
 		JButton bCreate = new JButton("Create training session");
 		bCreate.setBounds(47, 287, 180, 29);
 		panel.add(bCreate);
+		
+		JButton bSelectHour = new JButton("Select hour");
+		bSelectHour.setBounds(426, 180, 117, 29);
+		panel.add(bSelectHour);
+		
+		TimePicker tp = new TimePicker();
+		tp.setForeground(new Color(255, 128, 0));
+		tp.getComponent(3).setVisible(false);
+		tp.getComponent(2).setVisible(false);
+		
+		bSelectHour.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int option = JOptionPane.showConfirmDialog(null, tp, "Select start time", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+				
+				if(option == JOptionPane.OK_OPTION) {
+					String selectedHour = tp.getSelectedTime();
+					if(selectedHour.contains("PM")) {
+						int hour = Integer.parseInt(selectedHour.substring(0, 2)) + 12;
+						selectedHour = hour + ":" + selectedHour.substring(3, 5);
+					} else {
+						selectedHour = selectedHour.substring(0, 5);
+					}
+					tfStartTime.setText(selectedHour);
+				}
+			}
+			
+		});
 		
 		bCreate.addActionListener(new ActionListener() {
 
