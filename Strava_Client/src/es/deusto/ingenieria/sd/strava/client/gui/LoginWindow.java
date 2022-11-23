@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class LoginWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField tEmail;
-	private JTextField tPass;
+	private JPasswordField passwordField;
 
 	public LoginWindow() {
 
@@ -38,18 +38,25 @@ public class LoginWindow extends JFrame {
 		pPrin.add(lEmail);
 
 		tEmail = new JTextField();
-		tEmail.setBounds(125, 83, 202, 26);
+		tEmail.setBounds(125, 84, 202, 26);
 		pPrin.add(tEmail);
 		tEmail.setColumns(10);
 
 		JLabel lPass = new JLabel("Password");
 		lPass.setBounds(125, 121, 61, 16);
 		pPrin.add(lPass);
-
-		tPass = new JTextField();
-		tPass.setBounds(125, 148, 202, 26);
-		pPrin.add(tPass);
-		tPass.setColumns(10);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(125, 147, 202, 26);
+		pPrin.add(passwordField);
+		
+		JButton bShow = new JButton("Show");
+		bShow.setBounds(337, 149, 89, 23);
+		pPrin.add(bShow);
+		
+		JButton bHide = new JButton("Hide");
+		bHide.setBounds(337, 149, 89, 23);
+		pPrin.add(bHide);
 
 		JButton bStrava = new JButton("Login with Strava");
 		bStrava.setBounds(6, 204, 135, 26);
@@ -74,15 +81,37 @@ public class LoginWindow extends JFrame {
 
 		// Actions
 
+		bShow.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				passwordField.setEchoChar((char) 0);
+				bShow.setVisible(false);
+				bHide.setVisible(true);
+			}
+			
+		});
+		
+		bHide.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				passwordField.setEchoChar('*');
+				bHide.setVisible(false);
+				bShow.setVisible(true);
+			}
+			
+		});
+		
 		bStrava.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (tEmail.getText().isEmpty() || tPass.getText().isEmpty()) {
+				if (tEmail.getText().isEmpty() || String.valueOf(passwordField.getPassword()).equals("")) {
 					JOptionPane.showMessageDialog(null, "You need to type an email and a password", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					boolean login = LoginController.getInstance().login(tEmail.getText(), tPass.getText(), "STRAVA");
+					boolean login = LoginController.getInstance().login(tEmail.getText(), String.valueOf(passwordField.getPassword()), "STRAVA");
 					if (login) {
 						ChallengesWindow cw = new ChallengesWindow();
 						cw.setVisible(true);
@@ -100,11 +129,11 @@ public class LoginWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (tEmail.getText().isEmpty() || tPass.getText().isEmpty()) {
+				if (tEmail.getText().isEmpty() || String.valueOf(passwordField.getPassword()).equals("")) {
 					JOptionPane.showMessageDialog(null, "You need to type an email and a password", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					boolean login = LoginController.getInstance().login(tEmail.getText(), tPass.getText(), "GOOGLE");
+					boolean login = LoginController.getInstance().login(tEmail.getText(), String.valueOf(passwordField.getPassword()), "GOOGLE");
 					if (login) {
 						ChallengesWindow cw = new ChallengesWindow();
 						cw.setVisible(true);
@@ -122,11 +151,11 @@ public class LoginWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (tEmail.getText().isEmpty() || tPass.getText().isEmpty()) {
+				if (tEmail.getText().isEmpty() || String.valueOf(passwordField.getPassword()).equals("")) {
 					JOptionPane.showMessageDialog(null, "You need to type an email and a password", "Error",
 							JOptionPane.ERROR_MESSAGE);
 				} else {
-					boolean login = LoginController.getInstance().login(tEmail.getText(), tPass.getText(), "FACEBOOK");
+					boolean login = LoginController.getInstance().login(tEmail.getText(), String.valueOf(passwordField.getPassword()), "FACEBOOK");
 					if (login) {
 						ChallengesWindow cw = new ChallengesWindow();
 						cw.setVisible(true);
