@@ -68,7 +68,7 @@ public class StravaAppService {
 
 	public List<TrainingSession> getSportTrainingSessions(String sport) {
 		List<TrainingSession> trainingSessions = new ArrayList<>();
-		for (Profile profile : StravaAppService.getInstance().retrieveProfiles()) {
+		for (Profile profile : StravaAccountService.getInstance().getGeneralProfileMap().values()) {
 			if (!profile.getCreatedTrainingSessions().isEmpty()) {
 				for (TrainingSession trainingSession : profile.getCreatedTrainingSessions()) {
 					if (trainingSession.getSport().name().equals(sport)) {
@@ -83,7 +83,7 @@ public class StravaAppService {
 	public List<Challenge> getActiveChallenges() {
 		List<Challenge> Active = new ArrayList<Challenge>();
 
-		for (Profile profile : StravaAppService.getInstance().retrieveProfiles()) {
+		for (Profile profile : StravaAccountService.getInstance().getGeneralProfileMap().values()) {
 			for (Challenge c : profile.getSetUpChallenges()) {
 				if (c.isActive()) {
 					Active.add(c);
@@ -97,19 +97,4 @@ public class StravaAppService {
 		p.addChallenge(c);
 	}
 
-	// Auxiliary method to gather all the profiles in the AppServices, due to no DAO
-	public List<Profile> retrieveProfiles() {
-		List<Profile> profileList = new ArrayList<>();
-		for (Profile profile : StravaLoginAppService.getInstance().getStravaProfileMap().values()) {
-			profileList.add(profile);
-		}
-		for (Profile profile : FacebookLoginAppService.getInstance().getFacebookProfileMap().values()) {
-			profileList.add(profile);
-		}
-		for (Profile profile : GoogleLoginAppService.getInstance().getGoogleProfileMap().values()) {
-			profileList.add(profile);
-		}
-
-		return profileList;
-	}
 }

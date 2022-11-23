@@ -16,10 +16,7 @@ import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.ChallengeDTO;
 import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionAssembler;
 import es.deusto.ingenieria.sd.strava.server.data.dto.TrainingSessionDTO;
-import es.deusto.ingenieria.sd.strava.server.services.FacebookLoginAppService;
-import es.deusto.ingenieria.sd.strava.server.services.GoogleLoginAppService;
-import es.deusto.ingenieria.sd.strava.server.services.RegisterAppService;
-import es.deusto.ingenieria.sd.strava.server.services.StravaLoginAppService;
+import es.deusto.ingenieria.sd.strava.server.services.StravaAccountService;
 import es.deusto.ingenieria.sd.strava.server.services.StravaAppService;
 
 public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
@@ -37,7 +34,7 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 			int maxBpm, int restBpm, String profileType) throws RemoteException {
 		System.out.println(" * RemoteFacade register(): " + email);
 
-		if (RegisterAppService.getInstance().register(email, password, name, birthDate, weight, height, maxBpm, restBpm, profileType)) {
+		if (StravaAccountService.getInstance().register(email, password, name, birthDate, weight, height, maxBpm, restBpm, profileType)) {
 			return true;
 		} else {
 			throw new RemoteException("Register fails, user is already registered!");
@@ -48,13 +45,9 @@ public class RemoteFacade extends UnicastRemoteObject implements IRemoteFacade {
 	public long login(String email, String password, String profileType) throws RemoteException {
 		System.out.println(" * RemoteFacade login(): " + email + " / " + password);
 		Profile profile = new Profile();
-		if (profileType.equals("STRAVA")) {
-			profile = StravaLoginAppService.getInstance().login(email, password);
-		} else if (profileType.equals("FACEBOOK")) {
-			profile = FacebookLoginAppService.getInstance().login(email, password);
-		} else if (profileType.equals("GOOGLE")) {
-			profile = GoogleLoginAppService.getInstance().login(email, password);
-		}
+		
+		profile = StravaAccountService.getInstance().login(email, password, profileType);
+		
 		if (profile != null) {
 			// If user is not logged in
 			if (!this.serverState.values().contains(profile)) {
