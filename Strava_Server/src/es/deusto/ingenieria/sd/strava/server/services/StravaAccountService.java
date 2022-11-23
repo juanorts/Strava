@@ -188,7 +188,6 @@ public class StravaAccountService {
 			// In Google Profiles we don't save the password in this server locally
 			Profile profile11 = new Profile(email, null, name, birthDate, weight, height, maxBpm, restBpm,
 					ProfileType.GOOGLE);
-			profile11.setPassword(null);
 			if (!GoogleLoginServiceGateway.getInstance().getGoogleProfileMap().containsKey(email)) {
 				GoogleLoginServiceGateway.getInstance().register(email, password);
 				StravaAccountService.getInstance().GeneralProfileMap.put(email, profile11);
