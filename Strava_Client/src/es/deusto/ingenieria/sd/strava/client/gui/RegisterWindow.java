@@ -176,7 +176,7 @@ public class RegisterWindow extends JDialog {
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-				        RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "GOOGLE");
+				        RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "GOOGLE");
 				        dispose();
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
@@ -199,7 +199,7 @@ public class RegisterWindow extends JDialog {
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-						RegisterController.getInstance().register(tEmail.getText(), null, tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "FACEBOOK");
+						RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "FACEBOOK");
 						dispose();
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
