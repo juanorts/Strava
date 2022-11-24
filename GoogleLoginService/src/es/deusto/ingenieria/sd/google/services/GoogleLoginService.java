@@ -1,13 +1,14 @@
-package es.deusto.ingenieria.sd.google.remote;
+package es.deusto.ingenieria.sd.google.services;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import es.deusto.ingenieria.sd.google.remote.IGoogleLogin;
 
-public class GoogleLoginService extends UnicastRemoteObject implements IGoogleLogin {
-	private static final long serialVersionUID = 1L;
+
+public class GoogleLoginService implements IGoogleLogin {
 	public static GoogleLoginService instance;
 	private Map<String, String> GoogleProfileMap = new HashMap<>();
 	
@@ -36,7 +37,6 @@ public class GoogleLoginService extends UnicastRemoteObject implements IGoogleLo
 	@Override
 	public boolean login(String email, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		System.out.println(" * GoogleLoginService login(): " + email);
 		if(GoogleLoginService.getInstance().GoogleProfileMap.get(email).equals(password)) {
 			return true;
 		}
@@ -49,7 +49,6 @@ public class GoogleLoginService extends UnicastRemoteObject implements IGoogleLo
 
 	@Override
 	public boolean register(String email, String password) throws RemoteException {
-		System.out.println(" * GoogleLoginService register(): " + email + " " + password);
 		// TODO Auto-generated method stub
 		GoogleLoginService.getInstance().addProfile(email, password);
 		return true;

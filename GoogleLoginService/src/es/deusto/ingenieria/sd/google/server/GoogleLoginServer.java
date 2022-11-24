@@ -2,7 +2,7 @@ package es.deusto.ingenieria.sd.google.server;
 
 import java.rmi.Naming;
 
-import es.deusto.ingenieria.sd.google.remote.GoogleLoginService;
+import es.deusto.ingenieria.sd.google.remote.GoogleRemoteFacade;
 import es.deusto.ingenieria.sd.google.remote.IGoogleLogin;
 
 public class GoogleLoginServer {
@@ -15,7 +15,7 @@ public class GoogleLoginServer {
 		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];		
 		
 		try {
-			IGoogleLogin remoteObject = GoogleLoginService.getInstance();			
+			IGoogleLogin remoteObject = new GoogleRemoteFacade();			
 			Naming.rebind(name, remoteObject);
 			System.out.println(" * Google Login Server '" + name + "' started!!");
 		} catch (Exception ex) {
