@@ -1,7 +1,22 @@
 package es.deusto.ingenieria.sd.strava.server.gateway;
 
 public class LoginServiceGatewayFactory {
-	public LoginServiceGateway createGateway(String what) {
+	
+	private static LoginServiceGatewayFactory instance;
+
+	protected LoginServiceGatewayFactory() {
+		super();
+	}
+
+	public static LoginServiceGatewayFactory getInstance() {
+		if (instance == null) {
+			instance = new LoginServiceGatewayFactory();
+		}
+
+		return instance;
+	}
+	
+	public ILoginServiceGateway createGateway(String what) {
 		// If Google is requested
 		if (what.equals("GOOGLE")) {
 			return GoogleLoginServiceGateway.getInstance();

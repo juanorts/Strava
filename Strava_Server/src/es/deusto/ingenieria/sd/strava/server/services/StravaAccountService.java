@@ -11,6 +11,7 @@ import es.deusto.ingenieria.sd.strava.server.data.domain.ProfileType;
 import es.deusto.ingenieria.sd.strava.server.data.domain.Sport;
 import es.deusto.ingenieria.sd.strava.server.data.domain.TrainingSession;
 import es.deusto.ingenieria.sd.strava.server.gateway.GoogleLoginServiceGateway;
+import es.deusto.ingenieria.sd.strava.server.gateway.LoginServiceGatewayFactory;
 
 public class StravaAccountService {
 	// Instance for the Singleton Pattern
@@ -143,7 +144,7 @@ public class StravaAccountService {
 		// TODO: Save and check profiles password hashed
 		boolean loginSuccess = false;
 		if (profileType.equals("GOOGLE")) {
-			loginSuccess = GoogleLoginServiceGateway.getInstance().login(email, password);
+			loginSuccess = LoginServiceGatewayFactory.getInstance().createGateway("GOOGLE").login(email, password);
 		} else if (profileType.equals("STRAVA")) {
 			loginSuccess = StravaLoginAppService.getInstance().login(email, password);
 		} else if (profileType.equals("FACEBOOK")) {
@@ -165,7 +166,7 @@ public class StravaAccountService {
 			// In Strava Profiles we save the password in this server locally
 			Profile profile = new Profile(email, password, name, birthDate, weight, height, maxBpm, restBpm,
 					ProfileType.STRAVA);
-			if (!StravaLoginAppService.getInstance().getStravaProfileMap().containsKey(email)) {
+			if (!StravaLoginAppService.getInstance().getProfileMap().containsKey(email)) {
 				StravaLoginAppService.getInstance().register(email, password);
 				StravaAccountService.getInstance().GeneralProfileMap.put(email, profile);
 				return true;
@@ -188,8 +189,8 @@ public class StravaAccountService {
 			// In Google Profiles we don't save the password in this server locally
 			Profile profile11 = new Profile(email, null, name, birthDate, weight, height, maxBpm, restBpm,
 					ProfileType.GOOGLE);
-			if (!GoogleLoginServiceGateway.getInstance().getProfileMap().containsKey(email)) {
-				GoogleLoginServiceGateway.getInstance().register(email, password);
+			if (!LoginServiceGatewayFactory.getInstance().createGateway("GOOGLE").getProfileMap().containsKey(email)) {
+				LoginServiceGatewayFactory.getInstance().createGateway("GOOGLE").register(email, password);
 				StravaAccountService.getInstance().GeneralProfileMap.put(email, profile11);
 				return true;
 			} else {

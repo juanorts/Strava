@@ -5,7 +5,7 @@ import java.util.Map;
 
 import es.deusto.ingenieria.sd.google.remote.IGoogleLogin;
 
-public class GoogleLoginServiceGateway extends LoginServiceGateway {
+public class GoogleLoginServiceGateway implements ILoginServiceGateway {
 	private static GoogleLoginServiceGateway instance;
 	private IGoogleLogin googleLoginService;
 
@@ -17,7 +17,7 @@ public class GoogleLoginServiceGateway extends LoginServiceGateway {
 			System.err.println("# Error locating remote facade: " + ex);
 		}
 	}
-
+	
 	public static GoogleLoginServiceGateway getInstance() {
 		if (instance == null) {
 			instance = new GoogleLoginServiceGateway();
@@ -58,4 +58,5 @@ public class GoogleLoginServiceGateway extends LoginServiceGateway {
 			return null;
 		}
 	}
+
 }
