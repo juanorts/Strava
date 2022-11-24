@@ -16,8 +16,8 @@ import com.toedter.calendar.JDateChooser;
 public class RegisterWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTextField tEmail;
-	private JTextField tPassword;
 	private JTextField tName;
+	private JPasswordField passwordField;
 	private JTextField tWeight;
 	private JTextField tHeight;
 	private JTextField tMaxBPM;
@@ -58,17 +58,25 @@ public class RegisterWindow extends JDialog {
 
 		tEmail = new JTextField();
 		tEmail.setColumns(10);
-		tEmail.setBounds(146, 139, 202, 26);
+		tEmail.setBounds(146, 140, 202, 26);
 		pMain.add(tEmail);
 
 		JLabel lPass = new JLabel("Password **");
 		lPass.setBounds(146, 177, 84, 16);
 		pMain.add(lPass);
-
-		tPassword = new JTextField();
-		tPassword.setColumns(10);
-		tPassword.setBounds(146, 204, 202, 26);
-		pMain.add(tPassword);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(146, 205, 202, 26);
+		pMain.add(passwordField);
+		
+		JButton bShow = new JButton("Show");
+		bShow.setBounds(358, 207, 89, 23);
+		pMain.add(bShow);
+		
+		JButton bHide = new JButton("Hide");
+		bHide.setBounds(358, 207, 89, 23);
+		bHide.setVisible(false);
+		pMain.add(bHide);
 
 		JLabel lBirthDate = new JLabel("Birth Date *");
 		lBirthDate.setBounds(146, 242, 202, 16);
@@ -142,18 +150,40 @@ public class RegisterWindow extends JDialog {
 
 		// Actions
 
+		bShow.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				passwordField.setEchoChar((char) 0);
+				bShow.setVisible(false);
+				bHide.setVisible(true);
+			}
+			
+		});
+		
+		bHide.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				passwordField.setEchoChar('*');
+				bHide.setVisible(false);
+				bShow.setVisible(true);
+				
+			}
+			
+		});
+		
 		bStrava.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (tEmail.getText().isEmpty() || tPassword.getText().isEmpty() || tName.getText().isEmpty()
+				if (tEmail.getText().isEmpty() || String.valueOf(passwordField.getPassword()).equals("") || tName.getText().isEmpty()
 						|| dateChooser.getDate() == null) {
 					JOptionPane.showMessageDialog(null, "You need to type your email, password, name and birthdate",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
-					
 					try {
-						RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "STRAVA");
+						RegisterController.getInstance().register(tEmail.getText(), String.valueOf(passwordField.getPassword()), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "STRAVA");
 						dispose();
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
@@ -167,6 +197,7 @@ public class RegisterWindow extends JDialog {
 
 		});
 
+		
 		bGoogle.addActionListener(new ActionListener() {
 
 			@Override
@@ -176,7 +207,7 @@ public class RegisterWindow extends JDialog {
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-				        RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "GOOGLE");
+				        RegisterController.getInstance().register(tEmail.getText(), String.valueOf(passwordField.getPassword()), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "GOOGLE");
 				        dispose();
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
@@ -199,7 +230,7 @@ public class RegisterWindow extends JDialog {
 							"Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
-						RegisterController.getInstance().register(tEmail.getText(), tPassword.getText(), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "FACEBOOK");
+						RegisterController.getInstance().register(tEmail.getText(), String.valueOf(passwordField.getPassword()), tName.getText(), dateChooser.getDate(),  Float.parseFloat("0" + tWeight.getText()), Integer.parseInt("0" + tHeight.getText()), Integer.parseInt("0" + tMaxBPM.getText()), Integer.parseInt("0" + tRestBPM.getText()), "FACEBOOK");
 						dispose();
 					} catch (NumberFormatException e) {
 						// TODO Auto-generated catch block
