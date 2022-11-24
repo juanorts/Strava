@@ -50,7 +50,7 @@ public class StravaLoginAppService {
 		return true;
 	}
 
-	public Map<String, String> getStravaProfileMap() {
+	public Map<String, String> getProfileMap() {
 		return StravaProfileMap;
 	}
 }
