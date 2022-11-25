@@ -154,11 +154,9 @@ public class StravaAccountService {
 
 	public boolean register(String email, String password, String name, Date birthDate, float weight, int height,
 			int maxBpm, int restBpm, String profileType) {
-		switch (profileType) {
-		case "STRAVA":
-			// In Strava Profiles we save the password in this server locally
-			Profile profile = new Profile(email, password, name, birthDate, weight, height, maxBpm, restBpm,
-					ProfileType.STRAVA);
+		Profile profile = new Profile(email, password, name, birthDate, weight, height, maxBpm, restBpm,
+				ProfileType.valueOf(profileType));
+		if (profileType.equals("STRAVA")) {
 			if (!StravaLoginAppService.getInstance().getProfileMap().containsKey(email)) {
 				StravaLoginAppService.getInstance().register(email, password);
 				StravaAccountService.getInstance().GeneralProfileMap.put(email, profile);
@@ -166,34 +164,15 @@ public class StravaAccountService {
 			} else {
 				return false;
 			}
-
-		case "FACEBOOK":
-			// In Facebook Profiles we don't save the password in this server locally
-			/*
-			 * Profile profile1 = new Profile(email, password, name, birthDate, weight,
-			 * height, maxBpm, restBpm, ProfileType.FACEBOOK); profile1.setPassword(null);
-			 * if
-			 * (!FacebookLoginAppService.getInstance().getFacebookProfileMap().containsKey(
-			 * email)) { FacebookLoginAppService.getInstance().addProfile(email, profile1);
-			 * return true; } else { return false; }
-			 */
-			return false;
-		case "GOOGLE":
-			// In Google Profiles we don't save the password in this server locally
-			Profile profile11 = new Profile(email, null, name, birthDate, weight, height, maxBpm, restBpm,
-					ProfileType.GOOGLE);
-			if (!LoginServiceGatewayFactory.getInstance().createGateway("GOOGLE").getProfileMap().containsKey(email)) {
-				LoginServiceGatewayFactory.getInstance().createGateway("GOOGLE").register(email, password);
-				StravaAccountService.getInstance().GeneralProfileMap.put(email, profile11);
+		} else {
+			if (!LoginServiceGatewayFactory.getInstance().createGateway(profileType).getProfileMap().containsKey(email)) {
+				LoginServiceGatewayFactory.getInstance().createGateway(profileType).register(email, password);
+				StravaAccountService.getInstance().GeneralProfileMap.put(email, profile);
 				return true;
 			} else {
 				return false;
 			}
-
-		default:
-			break;
 		}
-		return false;
 	}
 
 	public Map<String, Profile> getGeneralProfileMap() {
