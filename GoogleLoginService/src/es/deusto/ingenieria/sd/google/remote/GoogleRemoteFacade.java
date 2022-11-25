@@ -2,7 +2,6 @@ package es.deusto.ingenieria.sd.google.remote;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Map;
 
 import es.deusto.ingenieria.sd.google.services.GoogleLoginService;
 

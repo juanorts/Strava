@@ -3,7 +3,6 @@ package es.deusto.ingenieria.sd.facebook.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-import es.deusto.ingenieria.sd.facebook.services.FacebookLoginService;
 
 public class FacebookSocketServer {
 	private static int numClients = 0;

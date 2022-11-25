@@ -2,7 +2,6 @@ package es.deusto.ingenieria.sd.google.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Map;
 
 
 public interface IGoogleLogin extends Remote{
