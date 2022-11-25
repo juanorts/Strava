@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" output="bin" path="src"/>
 	<classpathentry kind="var" path="JRE_LIB" rootpath="JRE_SRCROOT" sourcepath="JRE_SRC"/>
-	<classpathentry kind="lib" path="C:/SoftLabs/SD/strava_workspace/Strava/Strava_Server/lib/Google.jar"/>
-	<classpathentry kind="lib" path="C:/SoftLabs/SD/strava_workspace/Strava/Strava_Server/lib/commons-codec-1.15.jar"/>
-	<classpathentry kind="con" path="C:/SoftLabs/SD/strava_workspace/Strava/Strava_Server/bin"/>
+	<classpathentry kind="lib" path="/Users/juan.orts/Documentos/GitHub/Strava/Strava_Server/lib/Google.jar"/>
+	<classpathentry kind="lib" path="/Users/juan.orts/Documentos/GitHub/Strava/Strava_Server/lib/commons-codec-1.15.jar"/>
+	<classpathentry kind="con" path="/Users/juan.orts/Documentos/GitHub/Strava/Strava_Server/bin"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
