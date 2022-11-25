@@ -21,8 +21,7 @@ public class LoginServiceGatewayFactory {
 		if (what.equals("GOOGLE")) {
 			return GoogleLoginServiceGateway.getInstance();
 		} else if (what.equals("FACEBOOK")) {
-			// TBD: Facebook Gateway
-			return null;
+			return FacebookLoginServiceGateway.getInstance();
 		}
 		return null;
 	}

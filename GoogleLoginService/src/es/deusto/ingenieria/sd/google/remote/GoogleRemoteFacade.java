@@ -37,7 +37,8 @@ public class GoogleRemoteFacade extends UnicastRemoteObject implements IGoogleLo
 	}
 
 	@Override
-	public Map<String, String> getGoogleProfileMap() throws RemoteException {
-		return GoogleLoginService.getInstance().getGoogleProfileMap();
+	public boolean isRegistered(String email) throws RemoteException {
+		return GoogleLoginService.getInstance().isRegistered(email);
 	}
+
 }

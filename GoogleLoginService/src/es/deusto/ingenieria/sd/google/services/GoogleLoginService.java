@@ -58,4 +58,8 @@ public class GoogleLoginService implements IGoogleLogin {
 		return GoogleProfileMap;
 	}
 	
+	public boolean isRegistered(String email) {
+		return GoogleProfileMap.containsKey(email);
+	}
+	
 }

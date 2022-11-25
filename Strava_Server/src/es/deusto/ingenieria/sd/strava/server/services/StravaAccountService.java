@@ -165,7 +165,7 @@ public class StravaAccountService {
 				return false;
 			}
 		} else {
-			if (!LoginServiceGatewayFactory.getInstance().createGateway(profileType).getProfileMap().containsKey(email)) {
+			if (!LoginServiceGatewayFactory.getInstance().createGateway(profileType).isRegistered(email)) {
 				LoginServiceGatewayFactory.getInstance().createGateway(profileType).register(email, password);
 				StravaAccountService.getInstance().GeneralProfileMap.put(email, profile);
 				return true;

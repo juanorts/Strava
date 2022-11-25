@@ -11,5 +11,5 @@ public interface IGoogleLogin extends Remote{
 	
 	public boolean register(String email, String password) throws RemoteException;
 
-	public Map<String, String> getGoogleProfileMap() throws RemoteException;
+	boolean isRegistered(String email) throws RemoteException;
 }

@@ -48,14 +48,13 @@ public class GoogleLoginServiceGateway implements ILoginServiceGateway {
 		}
 	}
 
-	public Map<String, String> getProfileMap() {
-		System.out.println("   - Obtaining Google profile map through Gateway");
-
+	public boolean isRegistered(String email) {
+		System.out.println("   - Checking if profile is registed with Google through Gateway");
 		try {
-			return this.googleLoginService.getGoogleProfileMap();
+			return this.googleLoginService.isRegistered(email);
 		} catch (Exception ex) {
 			System.out.println("   $ Error obtaining map: " + ex.getMessage());
-			return null;
+			return false;
 		}
 	}
 
