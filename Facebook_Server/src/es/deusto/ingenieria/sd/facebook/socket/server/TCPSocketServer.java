@@ -25,14 +25,14 @@ public class TCPSocketServer {
 		 */
 		
 		//Declaration of the ServerSocket (only a port number is needed)
-		try (ServerSocket tcpServerSocket = new ServerSocket(serverPort);) {
+		try (ServerSocket tcpServerSocket = new ServerSocket(serverPort)) {
 			System.out.println(" - TCPSocketServer: Waiting for connections '" + tcpServerSocket.getInetAddress().getHostAddress() + ":" + tcpServerSocket.getLocalPort() + "' ...");
 			
 			//The main thread is always waiting for connections
 			while (true) {
 				//When a connection from a client is received, a new EchoService is created. The "accept()" method returns the socket to
 				//communicate with the client.  Execution is stopped at the accept() method, waiting for a connection
-				FacebookLoginService.getInstance(tcpServerSocket.accept());
+				new FacebookLoginService(tcpServerSocket.accept());
 				System.out.println(" - TCPSocketServer: New client connection accepted. Client Number: " + numClients++);
 			}
 		} catch (IOException e) {
