@@ -142,7 +142,12 @@ public class StravaAccountService {
 	public Profile login(String email, String password, String profileType) {
 		// TODO: Get User using DAO and check
 		// TODO: Save and check profiles password hashed
-		boolean loginSuccess = LoginServiceGatewayFactory.getInstance().createGateway(profileType).login(email, password);
+		boolean loginSuccess = false;
+		if (profileType.equals("STRAVA")) {
+			loginSuccess = StravaLoginAppService.getInstance().login(email, password);
+		} else {
+			loginSuccess = LoginServiceGatewayFactory.getInstance().createGateway(profileType).login(email, password);
+		}
 
 		if (loginSuccess == true) {
 			Profile profile = StravaAccountService.getInstance().getGeneralProfileMap().get(email);
