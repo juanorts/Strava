@@ -16,13 +16,17 @@
         <pathelement location="${build.dir}"/>
     </path>
 	
-	<target name="1.build" description="Builds the project">
+	<target name="help">
+		<echo>Usage: ant [build | client]</echo>
+	</target>
+
+	<target name="build" description="Builds the project">
 		<delete dir="${build.dir}"/>
 		<mkdir dir="${build.dir}"/>
 		<javac srcdir="${source.dir}" destdir="${build.dir}" classpathref="classpath" deprecation="true" fork="true" includeantruntime="no"/>
     </target>
     
-	<target name="2.client" depends="1.build"  description="Runs Client program">
+	<target name="client" depends="build"  description="Runs Client program">
 		<java classname="es.deusto.ingenieria.sd.strava.client.Main" classpathref="classpath" fork="true">
 			<jvmarg value="-Djava.security.policy=${policy.file}"/>			
         	<arg value="${rmiregistry.IP}"/> 

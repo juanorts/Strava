@@ -29,7 +29,7 @@ public class LocalTest {
 			facade.logout(token);
 			System.out.println("Test user with mail ruben@hotmail.es logout");
 			// Test Login Facebook/Google
-			token = facade.login("alvaro@mail.es", null, "GOOGLE");
+			token = facade.login("alvaro@mail.es", "alvaro1234", "GOOGLE");
 			System.out.println("Test user with mail alvaro@mail.es login with token : " + token);
 			// Test Create Challenge
 			System.out.println("Test user with mail alvaro@mail.es created a challenge succesfully : " + facade.createChallenge("Run4Ever", new Date(2000, 8, 2), new Date(2000, 9, 2), 0, 60, "BOTH", token));
