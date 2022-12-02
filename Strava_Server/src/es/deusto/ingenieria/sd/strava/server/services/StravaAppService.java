@@ -94,7 +94,12 @@ public class StravaAppService {
 	}
 
 	public void acceptChallenge(Profile p, Challenge c) {
-		p.addChallenge(c);
+		if (!p.getAcceptedChallenges().contains(c)) {
+			p.acceptChallenge(c);
+		} else {
+			System.out.println("User has already accepted this challenge");
+		}
+			
 	}
 
 }
